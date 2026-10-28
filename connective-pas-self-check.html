@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<!-- This site is hosted on Netlify. Anyone can build and deploy a site
+     like this one for free: https://netlify.new/?utm_campaign=loops&utm_source=ai-legible&utm_medium=owned&utm_content=comment&utm_id=7609a197-c17f-4151-9271-205e55a5ffc4
+     Netlify hosting facts for this site: static/SSR served via Netlify Edge. -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>フィランソロピー自己診断（5軸・10問）｜Connective-PAS</title>
+<meta name="description" content="御社の社会貢献の現在地を、5つの軸で3分でスコア化します。戦略性・可視化・ステークホルダー連携・内部浸透・成果測定。無料・登録不要。">
+<!--
+  Connective-PAS lite自己診断 v2.0（2026-08-18）
+  v1.x（6軸12問）→ v2.0（母艦 営業資料v6 の5軸10問）へ作り直し。社長指示 2026-08-18。
+  変更点：①軸を母艦の5軸に統一 ②設問を「同意する/しない」形式から「実際にどうしているか」を選ぶ形式に変更
+          ③回答の記録・通知（GAS連携）を復活 ④結果画面のリンク切れ（プレースホルダ）を実URLに
+  ★設置時にやること：下の CONFIG.GAS_URL に、Apps Scriptのウェブアプリ URL を貼る（空でも診断自体は動く）
+-->
+<style>
+  :root{
+    /* 母艦トンマナ（ティール一色・白基調・メイリオ） */
+    --cyan:#5EB7C7;--cyan-deep:#2E8B9E;--cyan-light:#EAF6F8;--charcoal:#231F20;--ink:#33383b;
+    --muted:#6c7378;--gray-bg:#f8f8f7;--line:#CDE8ED;--white:#fff;
+    --font:'Meiryo UI','Meiryo','Yu Gothic UI','Yu Gothic','Hiragino Kaku Gothic ProN',sans-serif;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:var(--font);color:var(--charcoal);background:var(--gray-bg);line-height:1.8;font-size:16px;}
+  .wrap{max-width:760px;margin:0 auto;padding:28px 18px 60px;}
+  .head{text-align:center;margin-bottom:22px;}
+  .eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan-deep);}
+  .head h1{font-size:clamp(21px,4.5vw,28px);font-weight:800;margin:8px 0 6px;}
+  .head p{font-size:13.5px;color:var(--muted);}
+  .card{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:22px;margin-bottom:14px;box-shadow:0 4px 16px rgba(35,31,32,.04);}
+  .axis-label{font-size:11px;font-weight:700;color:var(--cyan-deep);letter-spacing:.08em;margin-bottom:4px;}
+  .q{font-size:15px;font-weight:700;color:var(--charcoal);margin-bottom:12px;line-height:1.6;}
+  .q .qn{display:inline-flex;width:24px;height:24px;border-radius:50%;background:var(--cyan-light);color:var(--cyan-deep);font-size:12px;font-weight:700;align-items:center;justify-content:center;margin-right:8px;vertical-align:middle;}
+  .opts{display:grid;grid-template-columns:1fr;gap:8px;}
+  .opt{position:relative;}
+  .opt input{position:absolute;opacity:0;inset:0;cursor:pointer;}
+  .opt label{display:block;font-size:13.5px;font-weight:600;color:var(--ink);background:var(--gray-bg);border:2px solid var(--line);border-radius:9px;padding:12px 14px;cursor:pointer;transition:all .15s;line-height:1.6;}
+  .opt input:checked + label{background:var(--cyan-light);border-color:var(--cyan);color:var(--cyan-deep);}
+  .opt input:focus-visible + label{outline:2px solid var(--cyan-deep);outline-offset:2px;}
+  .submit-wrap{text-align:center;margin-top:8px;}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;font-weight:700;border-radius:9px;border:none;cursor:pointer;transition:transform .15s,background .2s,border-color .2s;}
+  .btn-primary{background:var(--cyan);color:#0c3a40;box-shadow:0 6px 18px rgba(94,183,199,.35);font-size:16px;padding:16px 30px;}
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-secondary{background:var(--white);color:var(--cyan-deep);border:2px solid var(--cyan);font-size:14px;padding:12px 22px;}
+  .btn-ghost{background:var(--white);color:var(--charcoal);border:1.5px solid #cfcfca;font-size:14px;padding:12px 22px;}
+  .err{color:#b15348;font-size:13px;font-weight:700;margin-top:10px;min-height:18px;}
+  .progress{position:sticky;top:0;z-index:5;background:var(--gray-bg);padding:8px 0 10px;margin-bottom:8px;}
+  .progress-track{height:6px;background:#e6e6e2;border-radius:4px;overflow:hidden;}
+  .progress-fill{height:100%;width:0;background:var(--cyan);transition:width .3s;}
+  .progress-text{font-size:11.5px;color:var(--muted);text-align:right;margin-top:4px;}
+  /* result */
+  #result{display:none;}
+  .res-hero{background:var(--charcoal);color:#fff;border-radius:16px;padding:30px 26px;text-align:center;margin-bottom:16px;}
+  .res-hero .phase-k{font-size:12px;color:var(--cyan);font-weight:700;letter-spacing:.1em;}
+  .res-hero .phase{font-size:clamp(24px,5vw,34px);font-weight:800;margin:6px 0;}
+  .res-hero .score{font-size:14px;color:#cdd6da;}
+  .res-hero .score b{color:var(--cyan);font-size:30px;}
+  .res-hero .score-sub{display:block;font-size:12px;color:#9aa6ab;margin-top:6px;}
+  .bar-row{display:flex;align-items:center;gap:12px;margin:11px 0;}
+  .bar-name{width:150px;font-size:13px;font-weight:700;color:var(--charcoal);flex-shrink:0;}
+  @media(max-width:560px){.bar-name{width:98px;font-size:12px;}}
+  .bar-track{flex:1;height:14px;background:var(--gray-bg);border-radius:8px;overflow:hidden;border:1px solid var(--line);}
+  .bar-fill{height:100%;background:linear-gradient(90deg,var(--cyan),var(--cyan-deep));border-radius:8px;width:0;transition:width .8s ease;}
+  .bar-val{width:52px;text-align:right;font-size:13px;font-weight:800;color:var(--cyan-deep);flex-shrink:0;}
+  .res-comment{font-size:14px;color:var(--ink);line-height:1.85;margin:6px 0 2px;}
+  .nudge{background:var(--cyan-light);border:1px solid var(--cyan);border-radius:12px;padding:18px 20px;margin-top:14px;}
+  .nudge h4{font-size:14px;color:var(--cyan-deep);font-weight:700;margin-bottom:6px;}
+  .nudge p{font-size:13px;color:var(--ink);line-height:1.75;}
+  .res-cta{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;}
+  @media(max-width:560px){.res-cta{grid-template-columns:1fr;}}
+  .res-sec{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px;}
+  .disc{font-size:11px;color:var(--muted);text-align:center;margin-top:18px;line-height:1.7;}
+  /* 連絡先（任意） */
+  .lead h4{font-size:15px;font-weight:800;margin-bottom:4px;}
+  .lead .lead-note{font-size:12.5px;color:var(--muted);margin-bottom:14px;line-height:1.7;}
+  .lead-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  @media(max-width:560px){.lead-grid{grid-template-columns:1fr;}}
+  .fld label{display:block;font-size:12px;font-weight:700;color:var(--ink);margin-bottom:4px;}
+  .fld input{width:100%;font-family:var(--font);font-size:14px;padding:11px 12px;border:1.5px solid var(--line);border-radius:8px;background:var(--white);color:var(--charcoal);}
+  .fld input:focus{outline:none;border-color:var(--cyan);}
+  .lead-msg{font-size:13px;font-weight:700;margin-top:10px;min-height:18px;}
+  .lead-msg.ok{color:var(--cyan-deep);}
+  .lead-msg.ng{color:#b15348;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <div class="eyebrow">Free Self-Check</div>
+    <h1>フィランソロピー自己診断</h1>
+    <p>5つの軸・全10問・約3分。御社の社会貢献の“現在地”を、その場でスコア化します。<br>無料・登録不要（結果はこの画面に表示されます）</p>
+  </div>
+
+  <div class="progress" id="progress">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-text"><span id="progressText">0 / 10 問</span></div>
+  </div>
+
+  <form id="quiz"></form>
+  <div class="submit-wrap">
+    <button type="button" class="btn btn-primary" id="goBtn">結果を見る　→</button>
+    <div class="err" id="err"></div>
+  </div>
+
+  <div id="result">
+    <div class="res-hero">
+      <div class="phase-k" id="phaseStage">―</div>
+      <div class="phase" id="phaseName">―</div>
+      <div class="score">総合スコア <b id="avgScore">0</b> <span style="font-size:14px;">/ 10</span>
+        <span class="score-sub">（5軸合計 <span id="totalScore">0</span> / 50点）</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div id="bars"></div>
+    </div>
+
+    <div class="card">
+      <p class="res-comment" id="resComment"></p>
+      <div class="nudge">
+        <h4>この診断は“体重計”です</h4>
+        <p>ここで分かるのは「点数」と「現在地のフェーズ」まで。<b>なぜその点数なのかという原因の特定と、御社に合わせた具体的な打ち手</b>は、専門家がお出しする「フィランソロピー現状診断（＝人間ドック）」で行います。同じ5つの軸で、専門家が1〜10点で評価し、レポートにしてお渡しします。</p>
+      </div>
+      <div class="res-cta">
+        <a class="btn btn-primary" href="https://guide.cnectv.com/connective-pas-guide-dl" target="_blank" rel="noopener">無料ガイドブックをDL</a>
+        <a class="btn btn-secondary" href="https://forms.gle/2akHZXZfunLVTUkHA" target="_blank" rel="noopener">30分の無料相談</a>
+      </div>
+      <div class="res-sec">
+        <a class="btn btn-ghost" href="https://www.cnectv.com/connective-pas" target="_blank" rel="noopener">現状診断について見る</a>
+        <button type="button" class="btn btn-ghost" id="retry">もう一度診断する</button>
+      </div>
+    </div>
+
+    <div class="card lead">
+      <h4>診断結果の控えを、メールでお送りします（任意）</h4>
+      <p class="lead-note">5軸それぞれの点数と、同じフェーズの企業に共通してみられる傾向を添えてお送りします。<br>ご記入がなくても結果は上に表示されています。営業のご連絡が目的ではありません。</p>
+      <div class="lead-grid">
+        <div class="fld"><label for="ldCompany">会社名</label><input type="text" id="ldCompany" autocomplete="organization" placeholder="例）株式会社◯◯"></div>
+        <div class="fld"><label for="ldDept">部署名</label><input type="text" id="ldDept" autocomplete="organization-title" placeholder="例）サステナビリティ推進部"></div>
+        <div class="fld"><label for="ldName">お名前</label><input type="text" id="ldName" autocomplete="name" placeholder="例）山田 太郎"></div>
+        <div class="fld"><label for="ldEmail">メールアドレス</label><input type="email" id="ldEmail" autocomplete="email" placeholder="例）taro@example.co.jp"></div>
+      </div>
+      <div style="text-align:center;margin-top:14px;">
+        <button type="button" class="btn btn-secondary" id="ldSend">結果の控えを受け取る</button>
+      </div>
+      <div class="lead-msg" id="ldMsg"></div>
+    </div>
+
+    <p class="disc">本診断は簡易的なセルフチェックです。結果はご入力内容に基づく目安であり、個別のアドバイス、支援先（NPO等）のご紹介、御社専用の実行計画は含まれません。<br>© Connective LLC ｜ Connective-PAS</p>
+  </div>
+</div>
+
+<script>
+  /* ══════ 設置時の設定 ══════ */
+  var CONFIG = {
+    GAS_URL: "https://script.google.com/macros/s/AKfycby83ggqC4vldQAnhU7eH_rDrkRK1xMnxVtTRn4PqLsLHQEKIckWhRzgnloKmFuV3kfDtQ/exec",  // 2026-08-19 設置済み
+    TOKEN:   "cpas-lite-diag-2026"    // GAS側 CONFIG.TOKEN と一致させる
+  };
+
+  /* ══════ 母艦（営業資料v6）と同じ5軸 ══════ */
+  var AX = [
+    {key:"戦略性", qs:[
+      {t:"「なぜ自社が社会貢献に取り組むのか」を社外から問われたら、どうお答えになりますか。", o:[
+        "答える人によって答えが変わる／うまく答えられない",
+        "経営者か担当者であれば、口頭で説明できる",
+        "経営計画・方針文書に明文化されている"]},
+      {t:"いまの活動の「カタチ」（寄付・社員参加・基金・協働・本業との統合など）は、どのように決まりましたか。", o:[
+        "これまでの経緯で、なんとなく続いている",
+        "他社の事例や紹介を参考に決めた",
+        "自社の理念・強みに照らし、複数の選択肢から選んだ"]}
+    ]},
+    {key:"可視化", qs:[
+      {t:"社会貢献活動の成果を、社外の方に数字や事例で語れますか。", o:[
+        "ほとんど語れない",
+        "寄付額や参加人数など、一部なら語れる",
+        "指標を決めて継続的に記録し、経営の言葉で語れる"]},
+      {t:"社会貢献の取り組みについて、社外への発信はどうされていますか。", o:[
+        "特にしていない",
+        "単発で、思いついたときにしている",
+        "定期的に発信し、反応も確認している"]}
+    ]},
+    {key:"ステークホルダー連携", qs:[
+      {t:"支援先・連携先（NPO等）は、どなたがどのように選んでいますか。", o:[
+        "経営者の関心やご縁で決まっている",
+        "担当者が調べて決めている",
+        "客観的な基準や第三者の評価を用いて選んでいる"]},
+      {t:"支援先の活動実態や財務状況の確認は、どこまでされていますか。", o:[
+        "特に確認していない",
+        "Webサイトやパンフレットを見る程度",
+        "資料を取り寄せ、定期的に確認している"]}
+    ]},
+    {key:"内部浸透", qs:[
+      {t:"経営層は、社会貢献活動にどのように関わっていますか。", o:[
+        "担当部署に任せきりになっている",
+        "節目の報告は受けている",
+        "方針決定に関与し、自らの言葉で語っている"]},
+      {t:"一般社員にとって、この活動はどのような位置づけですか。", o:[
+        "何をやっているか、ほとんど知られていない",
+        "知ってはいるが、自分ごとにはなっていない",
+        "参加の機会があり、意義が共有されている"]}
+    ]},
+    {key:"成果測定", qs:[
+      {t:"寄付や支援をした「後」、その使われ方や経過を把握していますか。", o:[
+        "お渡ししたら、基本的にそこで終わり",
+        "報告が届けば目を通している",
+        "定期的に確認し、必要に応じて改善を働きかけている"]},
+      {t:"活動を続けるか・見直すかの判断は、何を根拠にされていますか。", o:[
+        "判断の場が特にない／前年を踏襲している",
+        "担当者の手応えで判断している",
+        "決めた指標の測定結果をもとに判断している"]}
+    ]}
+  ];
+  var PTS = [1,3,5];           // 選択肢の配点
+  var TOTAL_Q = 10;            // 5軸 × 2問
+
+  var form = document.getElementById("quiz");
+  var qi = 0;
+  AX.forEach(function(ax, ai){
+    ax.qs.forEach(function(q, j){
+      qi++;
+      var card = document.createElement("div"); card.className = "card";
+      var html = '<div class="axis-label">'+ax.key+'</div>'
+               + '<div class="q"><span class="qn">'+qi+'</span>'+q.t+'</div><div class="opts">';
+      q.o.forEach(function(text, k){
+        var name = "q_"+ai+"_"+j, id = name+"_"+k;
+        html += '<div class="opt"><input type="radio" name="'+name+'" id="'+id+'" value="'+PTS[k]+'">'
+              + '<label for="'+id+'">'+text+'</label></div>';
+      });
+      html += '</div>';
+      card.innerHTML = html;
+      form.appendChild(card);
+    });
+  });
+
+  form.addEventListener("change", updateProgress);
+  function answeredCount(){ return document.querySelectorAll('#quiz input[type=radio]:checked').length; }
+  function updateProgress(){
+    var n = answeredCount();
+    document.getElementById("progressFill").style.width = (n/TOTAL_Q*100)+"%";
+    document.getElementById("progressText").textContent = n+" / "+TOTAL_Q+" 問";
+  }
+  updateProgress();
+
+  function calc(){
+    var axisScores = [], total = 0;
+    for(var ai=0; ai<AX.length; ai++){
+      var raw = 0;
+      for(var j=0; j<2; j++){
+        var sel = document.querySelector('input[name="q_'+ai+'_'+j+'"]:checked');
+        if(!sel) return null;
+        raw += parseInt(sel.value, 10);
+      }
+      axisScores.push(raw);   // 2問×最大5点 ＝ 軸ごと10点満点
+      total += raw;
+    }
+    return { axisScores: axisScores, total: total, avg: total/5 };  // avg＝10点満点
+  }
+
+  /* 母艦の現状診断と同じフェーズ名（4段階） */
+  function phaseOf(avg){
+    if(avg >= 8) return {name:"戦略統合フェーズ", k:"Stage 4 / 4",
+      c:"社会貢献が、経営戦略の柱として機能しつつある状態です。次のテーマは「第三者性」。社内の自己評価だけでは、取引先・株主・求職者に対する説得力に天井が生じます。成果を、投資家・採用・メディアに向けた“資産”として活かす段階です。"};
+    if(avg >= 6) return {name:"成長加速フェーズ", k:"Stage 3 / 4",
+      c:"土台はできており、「やってはいるが、まだ十分に評価されていない」状態です。可視化と外部発信を整えれば、取り組みが経営成果に接続しはじめます。"};
+    if(avg >= 4) return {name:"基盤構築フェーズ", k:"Stage 2 / 4",
+      c:"活動は動いているものの、戦略と測定が未整備で、担当者を中心に回っている状態です。最も多くの企業がここにいます。仕組みを整えた効果が、最も大きく出る段階でもあります。"};
+    return {name:"活動立上げフェーズ", k:"Stage 1 / 4",
+      c:"これから本格化していく段階です。最初に方向性を設計しておくと、後の手戻りがほとんど生じません。いきなり寄付先を探すより、目的とカタチの設計から入るほうが、後で「なぜここに」と問われたときに答えられます。"};
+  }
+
+  var lastResult = null;
+
+  function show(r){
+    var ph = phaseOf(r.avg);
+    document.getElementById("phaseStage").textContent = ph.k;
+    document.getElementById("phaseName").textContent  = ph.name;
+    document.getElementById("avgScore").textContent   = r.avg.toFixed(1);
+    document.getElementById("totalScore").textContent = r.total;
+
+    /* 最も低い軸を1つだけ名指しする（一般的な傾向の範囲にとどめる） */
+    var li = 0;
+    for(var k=1; k<r.axisScores.length; k++){ if(r.axisScores[k] < r.axisScores[li]) li = k; }
+    var extra = (r.axisScores[li] >= 8)
+      ? "5つの軸すべてが高い水準にあります。この水準の企業に共通する次のテーマは、自己評価を外部の目で確かめることです。"
+      : "5軸のなかでは「"+AX[li].key+"」が"+r.axisScores[li]+"点と相対的に低くなっています。この軸から手をつけた企業ほど、全体の説得力が上がる傾向があります。";
+    document.getElementById("resComment").textContent = ph.c + " " + extra;
+
+    var bars = document.getElementById("bars"); bars.innerHTML = "";
+    for(var i=0; i<AX.length; i++){
+      var row = document.createElement("div"); row.className = "bar-row";
+      row.innerHTML = '<div class="bar-name">'+AX[i].key+'</div>'
+                    + '<div class="bar-track"><div class="bar-fill" data-w="'+(r.axisScores[i]*10)+'"></div></div>'
+                    + '<div class="bar-val">'+r.axisScores[i]+' / 10</div>';
+      bars.appendChild(row);
+    }
+
+    document.getElementById("quiz").style.display = "none";
+    document.querySelector(".submit-wrap").style.display = "none";
+    document.getElementById("progress").style.display = "none";
+    document.getElementById("result").style.display = "block";
+    window.scrollTo({top:0, behavior:"smooth"});
+    setTimeout(function(){
+      document.querySelectorAll(".bar-fill").forEach(function(b){ b.style.width = b.getAttribute("data-w")+"%"; });
+    }, 120);
+
+    lastResult = { phase: ph.name, stage: ph.k, avg: r.avg, total: r.total, axisScores: r.axisScores, weakest: AX[li].key };
+    post({ kind:"lite_diag", stage:"completed" });   // 匿名でも「何件やられたか」は記録する
+  }
+
+  /* 記録・通知（GAS）。GAS_URL が空なら何もしない */
+  function post(extra, cb){
+    if(!CONFIG.GAS_URL){ if(cb) cb(true); return; }
+    if(!lastResult){ if(cb) cb(false); return; }
+    var payload = {
+      token: CONFIG.TOKEN, kind: "lite_diag", version: "v2.0",
+      axes: AX.map(function(a){ return a.key; }),
+      axisScores: lastResult.axisScores,
+      total: lastResult.total, avg: Number(lastResult.avg.toFixed(2)),
+      phase: lastResult.phase, weakest: lastResult.weakest,
+      company: document.getElementById("ldCompany").value.trim(),
+      dept:    document.getElementById("ldDept").value.trim(),
+      name:    document.getElementById("ldName").value.trim(),
+      email:   document.getElementById("ldEmail").value.trim(),
+      pageUrl: location.href
+    };
+    for(var k in extra){ payload[k] = extra[k]; }
+    fetch(CONFIG.GAS_URL, {
+      method:"POST", mode:"no-cors",
+      headers:{"Content-Type":"text/plain;charset=utf-8"},
+      body: JSON.stringify(payload)
+    }).then(function(){ if(cb) cb(true); }).catch(function(){ if(cb) cb(false); });
+  }
+
+  document.getElementById("goBtn").addEventListener("click", function(){
+    var r = calc();
+    if(!r){ document.getElementById("err").textContent = "すべての設問にお答えください。"; return; }
+    document.getElementById("err").textContent = "";
+    show(r);
+  });
+
+  document.getElementById("ldSend").addEventListener("click", function(){
+    var msg = document.getElementById("ldMsg");
+    var email = document.getElementById("ldEmail").value.trim();
+    var company = document.getElementById("ldCompany").value.trim();
+    if(!company){ msg.className="lead-msg ng"; msg.textContent="会社名をご記入ください。"; return; }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ msg.className="lead-msg ng"; msg.textContent="メールアドレスをご確認ください。"; return; }
+    if(!CONFIG.GAS_URL){ msg.className="lead-msg ng"; msg.textContent="ただいま送信を受け付けられません。お手数ですが info@cnectv.com までご連絡ください。"; return; }
+    msg.className="lead-msg"; msg.textContent="送信しています…";
+    post({ stage:"lead" }, function(ok){
+      if(ok){ msg.className="lead-msg ok"; msg.textContent="ありがとうございます。診断結果の控えを、ご記入のアドレスへお送りします。"; }
+      else  { msg.className="lead-msg ng"; msg.textContent="送信できませんでした。お手数ですが info@cnectv.com までご連絡ください。"; }
+    });
+  });
+
+  document.getElementById("retry").addEventListener("click", function(){
+    document.querySelectorAll('#quiz input[type=radio]').forEach(function(i){ i.checked = false; });
+    document.getElementById("result").style.display = "none";
+    document.getElementById("quiz").style.display = "block";
+    document.querySelector(".submit-wrap").style.display = "block";
+    document.getElementById("progress").style.display = "block";
+    document.getElementById("ldMsg").textContent = "";
+    lastResult = null;
+    updateProgress();
+    window.scrollTo({top:0, behavior:"smooth"});
+  });
+</script>
+</body>
+</html>

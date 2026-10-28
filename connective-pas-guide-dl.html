@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<!-- This site is hosted on Netlify. Anyone can build and deploy a site
+     like this one for free: https://netlify.new/?utm_campaign=loops&utm_source=ai-legible&utm_medium=owned&utm_content=comment&utm_id=7609a197-c17f-4151-9271-205e55a5ffc4
+     Netlify hosting facts for this site: static/SSR served via Netlify Edge. -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>無料ガイドブック ダウンロード｜Connective-PAS</title>
+<style>
+  :root{--cyan:#5ECBD8;--cyan-deep:#37AEBD;--cyan-light:#f0fbfc;--charcoal:#231F20;--ink:#33383b;--muted:#6c7378;--gray-bg:#f8f8f7;--line:#e7e7e3;--white:#fff;
+    --font:'Meiryo UI','Meiryo','Yu Gothic UI','Yu Gothic','Hiragino Kaku Gothic ProN',sans-serif;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:var(--font);color:var(--charcoal);background:var(--gray-bg);line-height:1.8;font-size:16px;}
+  .wrap{max-width:680px;margin:0 auto;padding:30px 18px 60px;}
+  .grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:20px;align-items:start;}
+  @media(max-width:640px){.grid{grid-template-columns:1fr;}}
+  .cover{background:var(--charcoal);color:#fff;border-radius:14px;padding:26px;}
+  .cover .eyebrow{font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--cyan);text-transform:uppercase;}
+  .cover h1{font-size:21px;font-weight:800;line-height:1.5;margin:10px 0 12px;}
+  .cover ul{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:12px;}
+  .cover li{font-size:13px;color:#d7dee1;display:flex;gap:8px;align-items:flex-start;}
+  .cover li::before{content:"✓";color:var(--cyan);font-weight:800;}
+  .card{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:24px;box-shadow:0 6px 20px rgba(35,31,32,.05);}
+  .card h2{font-size:18px;font-weight:800;margin-bottom:4px;}
+  .card .sub{font-size:12.5px;color:var(--muted);margin-bottom:16px;}
+  .field{margin-bottom:13px;}
+  .field label{display:block;font-size:12.5px;font-weight:700;margin-bottom:5px;}
+  .field label .req{color:#b15348;font-size:11px;margin-left:5px;}
+  .field input,.field select{width:100%;font-family:var(--font);font-size:14px;padding:11px 12px;border:1.5px solid var(--line);border-radius:8px;background:var(--gray-bg);}
+  .field input:focus,.field select:focus{outline:none;border-color:var(--cyan);background:#fff;}
+  .consent{font-size:11.5px;color:var(--muted);display:flex;gap:8px;align-items:flex-start;margin:10px 0 14px;}
+  .btn{width:100%;display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:800;border:none;border-radius:9px;cursor:pointer;background:var(--cyan);color:#0c3a40;font-size:16px;padding:16px;box-shadow:0 6px 18px rgba(94,203,216,.35);transition:transform .15s;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn[disabled]{opacity:.6;cursor:default;transform:none;}
+  .err{color:#b15348;font-size:12.5px;font-weight:700;margin-top:8px;min-height:16px;}
+  .priv{font-size:11px;color:var(--muted);margin-top:12px;line-height:1.6;}
+  #done{display:none;text-align:center;}
+  #done .ok{width:56px;height:56px;border-radius:50%;background:var(--cyan-light);display:flex;align-items:center;justify-content:center;margin:6px auto 12px;}
+  #done .ok svg{width:30px;height:30px;stroke:var(--cyan-deep);fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;}
+  #done h2{font-size:19px;margin-bottom:8px;}
+  #done p{font-size:13.5px;color:var(--ink);}
+  #done a.dl{color:var(--cyan-deep);font-weight:700;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="grid">
+    <div class="cover">
+      <div class="eyebrow">Free Guidebook</div>
+      <h1>企業フィランソロピー<br>の教科書</h1>
+      <p style="font-size:12.5px;color:#cdd6da;">“自社らしい”社会貢献を、最適な「カタチ」へ。寄付だけではない、構想から成果の見える化までをまとめた実務ガイド。<br><b style="color:#fff;">全8章・27ページ（PDF）</b></p>
+      <ul>
+        <li>第1章　そもそも、フィランソロピーとは何か</li>
+        <li>第2章　なぜ、いま経営テーマなのか</li>
+        <li>第3章　「やっているのに報われない」4つの落とし穴</li>
+        <li>第4章　「寄付」だけではない ── 5つのカタチ</li>
+        <li>第5章　成果を生む「一気通貫プロセス」</li>
+        <li>第6章　相手を「客観基準」で選ぶ</li>
+        <li>第7章　成果を「経営資産」に変える</li>
+        <li>第8章　はじめの一歩 ── 自社の現在地を知る</li>
+      </ul>
+    </div>
+
+    <div class="card" id="formCard">
+      <h2>無料ダウンロード</h2>
+      <div class="sub">下記をご入力いただくと、その場でダウンロードが始まります。</div>
+      <form id="dlForm" autocomplete="on">
+        <div class="field"><label>会社名 <span class="req">必須</span></label><input type="text" name="company" required></div>
+        <div class="field"><label>部署名 <span class="req">必須</span></label><input type="text" name="department" required></div>
+        <div class="field"><label>氏名 <span class="req">必須</span></label><input type="text" name="name" required></div>
+        <div class="field"><label>メールアドレス <span class="req">必須</span></label><input type="email" name="email" required></div>
+        <div class="field"><label>役職（任意）</label><input type="text" name="role"></div>
+        <label class="consent"><input type="checkbox" id="agree"> <span>個人情報の取扱いに同意します（ガイド送付・関連のご案内に利用します）。</span></label>
+        <button type="submit" class="btn" id="submitBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0c3a40" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+          入力して無料ダウンロード
+        </button>
+        <div class="err" id="err"></div>
+      </form>
+      <p class="priv">ご入力情報は、ガイドの提供および関連するご案内のために利用します。第三者提供は行いません。</p>
+    </div>
+
+    <div class="card" id="done">
+      <div class="ok"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
+      <h2>ありがとうございます！</h2>
+      <p>ダウンロードを開始しました。<br>始まらない場合は <a class="dl" id="manualDl" href="https://guide.cnectv.com/guide.pdf" target="_blank" rel="noopener">こちらから</a> 取得してください。</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* ===== 設定（ここを2か所、差し替えてください） =====
+     ENDPOINT … Google Apps Script ウェブアプリのURL（末尾 /exec）
+     PDF_URL  … ガイドPDFの「直接ダウンロード」URL
+                例) Google Drive: https://drive.google.com/uc?export=download&id=ファイルID
+  ================================================== */
+  var ENDPOINT = "https://script.google.com/macros/s/AKfycbzG-5-bQIEmo9OPZS_TbN6Qggp4S0V2i9FCSDR7xnIFMHFptBilyHQ1A1EEkKGZNbd3/exec";
+  var PDF_URL  = "https://guide.cnectv.com/guide.pdf";
+
+  var form = document.getElementById("dlForm");
+  form.addEventListener("submit", function(ev){
+    ev.preventDefault();
+    var err = document.getElementById("err"); err.textContent="";
+    if(!document.getElementById("agree").checked){ err.textContent="個人情報の取扱いへの同意が必要です。"; return; }
+    var btn = document.getElementById("submitBtn"); btn.disabled=true;
+
+    var data = new FormData(form);
+    data.append("source","guide_dl");
+    data.append("ts", new Date().toISOString());
+
+    // 1) リード情報を記録（成否に関わらずDLは進める：fire-and-forget）
+    try{
+      if(ENDPOINT.indexOf("http")===0){
+        fetch(ENDPOINT, {method:"POST", mode:"no-cors", body:data}).catch(function(){});
+      }
+    }catch(e){}
+
+    // 2) 自動ダウンロード開始
+    setTimeout(function(){
+      try{
+        var a=document.createElement("a"); a.href=PDF_URL; a.download=""; a.target="_blank";
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      }catch(e){ window.open(PDF_URL,"_blank"); }
+      document.getElementById("formCard").style.display="none";
+      document.getElementById("done").style.display="block";
+      document.getElementById("manualDl").href=PDF_URL;
+      window.scrollTo({top:0,behavior:"smooth"});
+    }, 250);
+  });
+</script>
+</body>
+</html>
