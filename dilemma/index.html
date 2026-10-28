@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>無料レポート『企業フィランソロピーのジレンマ』｜社会貢献の担当者へ</title>
+<meta name="description" content="社会貢献の担当者がぶつかる7つの悩みについて、27社がどう乗り越えようとしているかを、会社名と数字のまままとめた無料PDF（61ページ）。書き込める用紙3枚つき。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="無料レポート『企業フィランソロピーのジレンマ ── 他社は、どう乗り越えようとしているのか』">
+<meta property="og:description" content="社会貢献の7つの悩みと、27社の実例。会社名と数字のまま。書き込める用紙3枚つきの無料PDFです。">
+<meta property="og:url" content="https://guide.cnectv.com/dilemma/">
+<meta property="og:image" content="https://guide.cnectv.com/dilemma/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<script src="report.js"></script>
+<style>
+:root{
+  --navy:#13265C; --navy2:#1F3A82; --ink:#1B2240; --sub:#4A5170;
+  --btn:#0E9F4F; --btn-d:#08713A; --accent:#C9361C; /* ボタンは表紙の帯（赤）と分けて緑にする（10/28 社長） */
+  --yellow:#FFC83A; --lemon:#FFE24A; --sky:#3CC3CF; --sky-l:#E6F6F8; --cream:#FFF7E8; --line:#E3E6EE;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
+body{margin:0; background:#fff; color:var(--ink); font-size:16px; line-height:1.75; overflow-x:hidden;
+  font-family:"Meiryo UI","Hiragino Sans","Noto Sans JP","Hiragino Kaku Gothic ProN",sans-serif}
+h1,h2,h3,.say{word-break:auto-phrase}
+h1,h2,h3,.disp,.btn{font-family:"Hiragino Sans","Noto Sans JP","Meiryo UI",sans-serif}
+.wrap{max-width:1100px; margin:0 auto; padding:0 24px}
+.sec{padding:72px 0}
+.eyebrow{display:block; font-weight:800; font-size:14px; letter-spacing:.06em; color:var(--accent); margin-bottom:6px}
+h2{font-size:32px; line-height:1.4; font-weight:900; margin:0 0 12px; color:var(--navy)}
+.lead{font-size:16px; color:var(--sub); margin:0 0 28px}
+.src{font-size:12px; color:var(--sub); line-height:1.6}
+
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; border:0; cursor:pointer; text-decoration:none;
+  background:var(--btn); color:#fff; font-weight:900; font-size:18px; padding:16px 26px; border-radius:12px;
+  box-shadow:0 5px 0 var(--btn-d); transition:transform .1s, box-shadow .1s; line-height:1.35; text-align:center}
+.btn:hover{transform:translateY(2px); box-shadow:0 3px 0 var(--btn-d)}
+.btn:disabled{opacity:.6; cursor:default}
+
+/* ① 最初の画面 */
+.hero{position:relative; overflow:hidden; background:#fff; padding:22px 0 60px}
+.hero::before{content:""; position:absolute; inset:0; background:var(--yellow); clip-path:polygon(58% 0,100% 0,100% 100%,74% 100%)}
+.hero::after{content:""; position:absolute; inset:0; background:var(--sky); clip-path:polygon(86% 0,100% 0,100% 100%,94% 100%); opacity:.9}
+.hero .wrap{position:relative; z-index:1}
+.topbar{display:flex; justify-content:space-between; font-size:13px; font-weight:700; color:var(--navy); margin-bottom:34px}
+.hero-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:16px 56px; align-items:center;
+  grid-template-areas:"tags book" "h1 book" "gain book" "pts book" "form book"}
+.tags{grid-area:tags; display:flex; flex-wrap:wrap; gap:8px; align-items:center}
+.tag{font-weight:900; font-size:13px; padding:4px 12px; border-radius:99px; background:var(--navy); color:#fff}
+.tag.o{background:#fff; color:var(--navy); box-shadow:inset 0 0 0 2px var(--navy)}
+.hero h1{grid-area:h1; margin:4px 0 0; font-size:37px; line-height:1.4; font-weight:900; color:var(--navy)}
+.hero h1 .n{font-size:1.18em; color:var(--accent)}
+.hero .gain{grid-area:gain; margin:0; font-size:17px; font-weight:700; color:var(--ink); line-height:1.65}
+.hero .gain b{background:linear-gradient(transparent 60%, var(--lemon) 60%)}
+.pts{grid-area:pts; list-style:none; padding:0; margin:0; display:flex; gap:10px; flex-wrap:wrap}
+.pts li{display:flex; align-items:baseline; gap:6px; background:var(--cream); border:2px solid var(--navy); border-radius:12px; padding:6px 12px;
+  font-weight:800; font-size:14px; color:var(--navy)}
+.pts b{font-size:26px; line-height:1; font-family:"Hiragino Sans","Noto Sans JP",sans-serif}
+.hero .form-wrap{grid-area:form}
+.hero .dl-form .row{flex-direction:column}
+.hero .dl-form .btn, .hero .dl-form input[type=email]{flex:none; width:100%}
+.bookbox{grid-area:book; display:flex; justify-content:center; padding:10px 0}
+
+/* 立体の冊子＋後ろの中ページ */
+.book3d{position:relative; width:340px; height:481px; perspective:1600px}
+.book3d .pg{position:absolute; width:92%; aspect-ratio:1240/1754; background:#fff; border-radius:4px; box-shadow:0 10px 30px rgba(19,38,92,.2);
+  padding:7%; overflow:hidden; font-size:10px; line-height:1.5; color:var(--navy)}
+.book3d .pg1{right:-30%; top:8%; transform:rotate(8deg)}
+.book3d .pg2{right:-15%; top:4%; transform:rotate(4deg)}
+.book3d .front{position:relative; width:340px; transform:rotateY(-14deg) rotateZ(-2deg); transform-origin:left center;
+  box-shadow:-3px 0 0 #0b173c, 18px 26px 40px rgba(19,38,92,.35); border-radius:3px 6px 6px 3px; overflow:hidden}
+.book3d .front::after{content:""; position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(90deg, rgba(0,0,0,.25) 0, rgba(255,255,255,.14) 3%, transparent 7%)}
+.mini-h{font-weight:900; font-size:1.2em; line-height:1.35; margin:0 0 .6em}
+.mini-bar{height:.9em; background:var(--sky-l); border-radius:2px; margin:.45em 0; position:relative}
+.mini-bar i{position:absolute; left:0; top:0; bottom:0; background:var(--sky); border-radius:2px}
+.mini-line{height:.45em; background:#E9ECF3; border-radius:2px; margin:.5em 0}
+
+/* フォーム */
+.dl-form{background:#fff; border-radius:16px; padding:16px; box-shadow:0 10px 30px rgba(19,38,92,.12); border:2px solid var(--navy); position:relative}
+.dl-form .row{display:flex; gap:10px; flex-wrap:wrap}
+.dl-form input[type=email], .dl-form input[type=text]{flex:1 1 220px; min-width:0; font-size:17px; padding:14px; border:2px solid #C3C9D8; border-radius:10px; font-family:inherit; color:var(--ink)}
+.dl-form input:focus{outline:3px solid var(--lemon); border-color:var(--navy)}
+.dl-form .btn{flex:1 1 260px}
+.dl-form .help{font-size:13px; color:var(--sub); margin:8px 2px 0; line-height:1.55}
+.dl-form .company{display:none; margin-top:10px}
+.dl-form .company label{display:block; font-size:13px; font-weight:700; margin-bottom:4px}
+.dl-form .company input{width:100%}
+.dl-form .err{color:#B3261E; font-weight:700; font-size:14px; margin:6px 2px 0}
+.dl-form .err:empty{display:none}
+.dl-form .hp{position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden}
+.dl-form .pending{display:none; margin:10px 0 0; background:#FFF3C4; border-radius:10px; padding:10px 12px; font-size:14px; font-weight:700}
+.done{display:none; background:#fff; border-radius:16px; padding:20px; border:2px solid var(--navy); color:var(--ink)}
+.done h3{margin:0 0 6px; color:var(--navy); font-size:20px}
+.done p{margin:0; font-size:15px}
+
+/* ② 8つの章 */
+.ch-sec{background:var(--cream)}
+.ch-head{display:grid; grid-template-columns:1fr 360px; gap:40px; align-items:end; margin-bottom:24px}
+.ch-head .lead{margin:0}
+.note-box{background:#fff; border-left:5px solid var(--navy); border-radius:8px; padding:10px 14px; font-size:13px; line-height:1.6; color:var(--sub)}
+.chs{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:12px}
+.ch{background:#fff; border-radius:14px; padding:14px 16px 14px 70px; position:relative; border:1.5px solid var(--line)}
+.ch .no{position:absolute; left:14px; top:14px; width:42px; height:42px; border-radius:10px; background:var(--navy); color:#fff;
+  font-weight:900; font-size:11px; line-height:1.1; display:flex; flex-direction:column; align-items:center; justify-content:center}
+.ch .no b{font-size:19px; line-height:1}
+.ch:nth-child(2) .no{background:var(--btn)}
+.ch:nth-child(4n+3) .no{background:var(--yellow); color:var(--navy)}
+.ch:nth-child(4n+4) .no{background:var(--sky); color:var(--navy)}
+.ch h3{margin:0; font-size:16.5px; line-height:1.5; color:var(--navy); font-weight:900}
+.ch .ex{margin:6px 0 0; font-size:13.5px; line-height:1.6; color:var(--ink)}
+.ch .ex b{color:var(--navy)}
+.ch .st{display:flex; align-items:center; gap:8px; margin-top:8px; font-size:12px; color:var(--sub); line-height:1.4}
+.ch .st .bar{flex:0 0 90px; height:8px; background:#EEF0F5; border-radius:4px; overflow:hidden}
+.ch .st .bar i{display:block; height:100%; background:var(--navy)}
+.ch .st b{font-size:15px; color:var(--navy); font-family:"Hiragino Sans","Noto Sans JP",sans-serif}
+.ch-ends{margin-top:12px; font-size:13.5px; color:var(--sub)}
+
+/* ③ 中のCTA */
+.midcta{background:var(--navy); color:#fff; padding:40px 0; text-align:center}
+.midcta p{margin:0 0 16px; font-size:22px; font-weight:900; line-height:1.5}
+.midcta p span{color:var(--lemon)}
+
+/* ④ 手元に残るもの（中をのぞく＋成果） */
+.peeks{display:grid; grid-template-columns:repeat(3,1fr); gap:28px; align-items:start}
+.peek figure{margin:0}
+.peek .paper{aspect-ratio:1240/1754; border-radius:6px; box-shadow:0 12px 30px rgba(19,38,92,.18); overflow:hidden; padding:9%; background:#fff; color:var(--navy)}
+.peek:nth-child(1) .paper{transform:rotate(-2deg)}
+.peek:nth-child(3) .paper{transform:rotate(2deg)}
+.peek figcaption{margin-top:16px; font-size:14.5px; line-height:1.6}
+.peek figcaption b{display:block; color:var(--navy); font-size:16.5px; line-height:1.45; margin-bottom:2px}
+.paper .h{font-weight:900; font-size:14px; line-height:1.4; border-bottom:3px solid var(--navy); padding-bottom:6px; margin-bottom:8px}
+.paper .k{font-size:11px; font-weight:800; color:var(--accent)}
+.paper.bars16 .r{display:grid; grid-template-columns:1fr 26px; gap:6px; align-items:center; font-size:10px; margin:5px 0; line-height:1.3}
+.paper.bars16 .r i{display:block; height:7px; background:var(--sky); border-radius:3px; margin-top:2px}
+.paper.bars16 .r.on i{background:var(--navy)}
+.paper.bars16 .r span:last-child{font-weight:900; text-align:right}
+.paper.cases table{width:100%; border-collapse:collapse; font-size:11.5px; line-height:1.45}
+.paper.cases td{padding:6px 3px; border-bottom:1px solid var(--line); vertical-align:top; color:var(--ink)}
+.paper.cases td:first-child{font-weight:900; color:var(--navy); white-space:nowrap; width:5.2em}
+.paper.cases td b{color:var(--accent)}
+.paper.sheet{background:#FFFDF6}
+.sheet ul{list-style:none; margin:0; padding:0; font-size:12px}
+.sheet li{display:flex; align-items:center; gap:7px; padding:6px 0; border-bottom:1px dashed #CFC6B0; font-weight:700; color:var(--ink)}
+.sheet li i{flex:none; width:14px; height:14px; border:2px solid var(--navy); border-radius:3px}
+.sheet .w{margin-top:10px; font-size:11px; font-weight:800}
+.sheet .w div{height:20px; border-bottom:1px solid #CFC6B0}
+.mihon{font-size:12px; color:var(--sub); margin-top:14px}
+
+/* ⑤ 読んだ方の評価（10件を超えるまで非表示） */
+.reviews{background:var(--sky-l)}
+.reviews[hidden]{display:none}
+.rv-top{display:flex; align-items:baseline; gap:16px; flex-wrap:wrap; margin-bottom:16px}
+.rv-avg{font-size:44px; font-weight:900; color:var(--navy); line-height:1}
+.rv-stars{color:#B7791F; font-size:22px; letter-spacing:2px}
+.rv-list{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+.rv-list li{background:#fff; border-radius:12px; padding:14px 16px; font-size:14.5px}
+.rv-list .m{font-size:12px; color:var(--sub); margin-top:6px}
+
+/* ⑥ 会社・発行元・質問 */
+.info{display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start}
+details{border-bottom:2px solid var(--line)}
+summary{cursor:pointer; list-style:none; font-weight:800; font-size:16px; color:var(--navy); padding:14px 32px 14px 0; position:relative; line-height:1.5}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"＋"; position:absolute; right:2px; top:13px; color:var(--accent); font-weight:900}
+details[open] summary::after{content:"－"}
+details .body{padding:0 0 16px; font-size:15px; line-height:1.75}
+.cogrp{margin:0 0 10px}
+.cogrp b{display:block; color:var(--navy); font-size:14px}
+.cogrp span{font-size:14px}
+.pubbox{background:var(--cream); border-radius:14px; padding:18px 20px; margin-top:22px; font-size:14px; line-height:1.75}
+.pubbox b{color:var(--navy); font-size:15px}
+
+/* ⑦ 最後の申込 */
+.apply{background:var(--navy); color:#fff; padding:72px 0}
+.apply .grid{display:grid; grid-template-columns:260px 1fr; gap:56px; align-items:center}
+.apply h2{color:#fff}
+.apply .lead{color:#D5DBEE; margin-bottom:20px}
+.apply .dl-form{border-color:var(--lemon)}
+.apply .note2{font-size:13px; color:#D5DBEE; margin:14px 0 0; line-height:1.7}
+.apply .note2 a{color:#fff}
+.mini-cover{width:240px; transform:rotate(-4deg); box-shadow:16px 22px 40px rgba(0,0,0,.4); border-radius:3px; overflow:hidden}
+footer{background:#0B173C; color:#C6CEE6; font-size:13px; padding:22px 0 26px; text-align:center}
+footer a{color:#fff}
+.sticky{display:none}
+
+/* ───── スマホ ───── */
+@media (max-width:860px){
+  body{font-size:15px}
+  .wrap{padding:0 16px}
+  .sec{padding:44px 0}
+  h2{font-size:23px}
+  .lead{font-size:14.5px; margin-bottom:18px}
+  .hero{padding:10px 0 28px}
+  .hero::before{clip-path:polygon(78% 0,100% 0,100% 100%,92% 100%)}
+  .hero::after{display:none}
+  .topbar{margin-bottom:10px; font-size:11.5px}
+  .hero-grid{grid-template-columns:108px 1fr; gap:10px 14px; grid-template-areas:"tags tags" "h1 h1" "book gain" "book pts" "form form"}
+  .tag{font-size:11.5px; padding:2px 9px}
+  .hero h1{font-size:23px; line-height:1.42; margin:0}
+  .hero .gain{font-size:13px; line-height:1.55; align-self:end}
+  .pts{gap:5px; align-self:start}
+  .pts li{padding:2px 8px; font-size:11.5px; border-width:1.5px; border-radius:8px}
+  .pts b{font-size:17px}
+  .bookbox{padding:0; align-self:center}
+  .book3d{width:104px; height:147px}
+  .book3d .pg{display:none}
+  .book3d .front{transform:scale(.3059); transform-origin:0 0; box-shadow:-6px 0 0 #0b173c, 30px 40px 60px rgba(19,38,92,.35)}
+  .dl-form{padding:12px}
+  .dl-form .row{flex-direction:column; gap:8px}
+  .dl-form .btn{width:100%; flex:none; font-size:17px; padding:14px 12px}
+  .dl-form input[type=email]{flex:none; padding:12px}
+  .dl-form .help{font-size:12px; margin-top:6px}
+  .ch-head{grid-template-columns:1fr; gap:10px; margin-bottom:14px}
+  .note-box{font-size:12px; padding:8px 12px}
+  .chs{grid-template-columns:1fr; gap:8px}
+  .ch{padding:10px 12px 10px 56px; border-radius:12px}
+  .ch .no{left:10px; top:10px; width:36px; height:36px; font-size:10px}
+  .ch .no b{font-size:16px}
+  .ch h3{font-size:14.5px; line-height:1.45}
+  .ch .ex{font-size:12.5px; line-height:1.5; margin-top:3px}
+  .ch .st{margin-top:4px; font-size:11px}
+  .ch .st .bar{flex-basis:60px; height:6px}
+  .ch .st b{font-size:13px}
+  .ch-ends{font-size:12px}
+  .midcta{padding:26px 0}
+  .midcta p{font-size:17px; margin-bottom:12px}
+  .midcta .btn{width:100%; font-size:16px; padding:14px 10px}
+  .peeks{display:flex; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory; scroll-padding-left:16px; margin:0 -16px; padding:6px 16px 14px}
+  .peek{flex:none; width:270px; scroll-snap-align:start}
+  .peek:last-child{margin-right:16px}
+  .swipe{display:block!important}
+  .peek .paper{transform:none!important; padding:8%}
+  .peek figcaption{margin-top:10px; font-size:12.5px}
+  .peek figcaption b{font-size:14.5px}
+  .mihon{margin-top:4px}
+  .rv-list{grid-template-columns:1fr}
+  .info{grid-template-columns:1fr; gap:8px}
+  summary{font-size:14.5px; padding:12px 28px 12px 0}
+  details .body{font-size:13.5px}
+  .pubbox{font-size:13px; padding:14px 16px}
+  .apply{padding:44px 0 100px}
+  .apply .grid{grid-template-columns:1fr; gap:0}
+  .mini-cover{display:none}
+  footer{padding-bottom:90px}
+  .sticky{display:block; position:fixed; left:0; right:0; bottom:0; z-index:50; padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+    background:rgba(255,255,255,.97); box-shadow:0 -4px 16px rgba(19,38,92,.15); transition:transform .25s}
+  .sticky .btn{width:100%; font-size:16px; padding:13px}
+  .sticky.hide{transform:translateY(110%)}
+}
+@media (max-width:360px){ .hero h1{font-size:21px} }
+/* ===== 2026-10-28 公開用の上書き（表紙＝案1 v3の画像、章＝v6、フォーム＝教科書と同じ仕組み） ===== */
+.hero::after{display:none}
+.book3d{height:auto}
+.book3d .front img{display:block; width:100%; height:auto}
+.book3d .pg{padding:0; background:#fff}
+.book3d .pg img{display:block; width:100%; height:auto}
+.ch .cos{margin:6px 0 0; font-size:13.5px; line-height:1.6; color:var(--ink)}
+.ch .cos b{color:var(--navy)}
+.ch .sol{margin:8px 0 0; font-size:13px; line-height:1.55; color:var(--sub); background:var(--cream); border-radius:8px; padding:6px 10px}
+.ch .sol b{color:var(--accent); font-weight:900; margin-right:4px}
+.ch .pg{font-size:12px; color:var(--sub); margin-left:6px; font-weight:500}
+.ch-sec .ch .sol{background:#FFF9EC}
+.peek .shot{display:block; width:100%; height:auto; aspect-ratio:596/847; object-fit:cover; border-radius:6px; box-shadow:0 12px 30px rgba(19,38,92,.18); background:#fff; border:1px solid var(--line)}
+.peek:nth-child(1) .shot{transform:rotate(-2deg)}
+.peek:nth-child(3) .shot{transform:rotate(2deg)}
+.peeks4{grid-template-columns:repeat(4,1fr); gap:22px}
+.sheets{margin:28px 0 0; padding:0; list-style:none; display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
+.sheets li{background:var(--cream); border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.55}
+.sheets li b{display:inline-block; background:var(--navy); color:#fff; border-radius:6px; padding:0 8px; margin-right:6px; font-size:13px}
+.hero .cta{display:flex; flex-direction:column; gap:8px}
+.hero .cta .btn{width:100%}
+.hero .cta .help{font-size:13px; color:var(--sub); margin:0}
+.dl-form .grid2{display:grid; grid-template-columns:1fr 1fr; gap:10px 12px}
+.dl-form .field label{display:block; font-size:13px; font-weight:800; margin-bottom:4px; color:var(--navy)}
+.dl-form .field input{width:100%; font-size:16px; padding:12px; border:2px solid #C3C9D8; border-radius:10px; font-family:inherit; color:var(--ink)}
+.dl-form .req{display:inline-block; background:var(--btn); color:#fff; font-size:11px; border-radius:4px; padding:0 5px; margin-left:4px; vertical-align:1px}
+.dl-form .opt{display:inline-block; background:#8A91A8; color:#fff; font-size:11px; border-radius:4px; padding:0 5px; margin-left:4px; vertical-align:1px}
+.dl-form .agree{display:flex; gap:8px; align-items:flex-start; font-size:13.5px; margin:12px 0 10px; color:var(--ink); line-height:1.55}
+.dl-form .agree input{width:18px; height:18px; margin-top:2px; flex:none}
+.dl-form .agree a{color:var(--navy)}
+.dl-form .btn{width:100%}
+.dl-form .purpose{font-size:12.5px; color:var(--sub); line-height:1.6; margin:10px 2px 0}
+.dl-form .purpose a{color:var(--navy)}
+/* 見出しは3行で固定（10/28 社長）。いちばん長い2行目（18字）が左の欄に収まる大きさにする */
+.hero h1 .ln{display:block; white-space:nowrap}
+.hero h1{font-size:clamp(20px, calc(3vw - 4px), 37px)}
+@media (max-width:767px){ .hero h1{font-size:calc((100vw - 40px) / 18.5)} }
+.faq{margin:0}
+.faq dt{font-weight:800; font-size:16px; color:var(--navy); padding:14px 0 4px; border-top:2px solid var(--line); line-height:1.5}
+.faq dt::before{content:"Q"; display:inline-block; width:24px; height:24px; line-height:24px; text-align:center; border-radius:50%; background:var(--navy); color:#fff; font-size:13px; margin-right:8px; vertical-align:1px}
+.faq dd{margin:0; padding:0 0 14px 32px; font-size:15px; line-height:1.75; position:relative}
+.faq dd::before{content:"A"; position:absolute; left:0; top:0; width:24px; height:24px; line-height:24px; text-align:center; border-radius:50%; background:var(--yellow); color:var(--navy); font-weight:900; font-size:13px}
+@media (max-width:767px){ .faq dt{font-size:14.5px} .faq dd{font-size:13.5px} }
+.apply .dl-form{color:var(--ink)}
+.done a.dl{color:var(--navy); font-weight:800}
+@media (max-width:860px){
+  .book3d{width:104px; height:147px}
+  .ch .cos{font-size:12.5px; line-height:1.5; margin-top:3px}
+  .ch .sol{font-size:12px; padding:5px 8px; margin-top:6px}
+  .peeks4{display:flex}
+  .peek .shot{transform:none!important}
+  .sheets{grid-template-columns:1fr; gap:8px; margin-top:18px}
+  .sheets li{font-size:13px; padding:10px 12px}
+  .dl-form .grid2{grid-template-columns:1fr; gap:8px}
+  .hero .cta .help{font-size:12px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="topbar"><span></span><span>発行：コネクティブ合同会社</span></div>
+    <div class="hero-grid">
+      <div class="tags"><span class="tag o">社会貢献の担当者へ</span></div>
+      <h1><span class="ln">社会貢献の<span class="n" data-r="chapters">7</span>つの悩み。</span><span class="ln">他社がどう乗り越えようとしているか、</span><span class="ln"><span class="n" data-r="companies">27</span>社の実例で。</span></h1>
+      <p class="gain">読んだあと、<b>「なぜうちの会社がやるのか」「なぜ社員が参加しないのか」「活動で何が変わったのか」</b>を書き込める用紙3枚つき。</p>
+      <ul class="pts">
+        <li><b data-r="chapters">7</b>つの悩み</li>
+        <li><b data-r="companies">27</b>社の実例</li>
+        <li>用紙<b data-r="sheets">3</b>枚</li>
+      </ul>
+      <div class="bookbox">
+        <div class="book3d">
+          <div class="pg pg1" aria-hidden="true"><img src="img/page_09.jpg" alt=""></div>
+          <div class="pg pg2" aria-hidden="true"><img src="img/page_02.jpg" alt=""></div>
+          <div class="front"><img src="img/cover.png" width="720" height="1023" alt="表紙：企業フィランソロピーのジレンマ ── 他社は、どう乗り越えようとしているのか。7つのジレンマと、27社の事例。書き込める用紙3枚つき"></div>
+        </div>
+      </div>
+      <div class="form-wrap cta">
+        <a class="btn" href="#apply"><span>無料でPDFをダウンロード →</span></a>
+        <p class="help">全<span data-r="pages">61</span>ページ。メールアドレスを入れるだけで、その場でダウンロードが始まります。</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="sec ch-sec" id="chapters">
+  <div class="wrap">
+    <div class="ch-head">
+      <div>
+        <span class="eyebrow">この本に入っていること</span>
+        <h2><span data-r="chapters">7</span>つの章と、他社の乗り越え方</h2>
+        <p class="lead">経団連が153社に聞いた16の課題のうち、4割以上の会社が挙げていて、担当者が自分で手を付けられ、乗り越え方を公開している会社があるものを選びました。</p>
+      </div>
+      <p class="note-box">各章は「他社は、こう乗り越えようとしている」（会社名と数字のまま）と「解決策の一つ」でできています。すべての数字に出典を付けています。</p>
+    </div>
+    <ol class="chs" id="chList"></ol>
+    <p class="ch-ends">ほかに、序章（担当者は何に悩んでいるのか。16の課題の全体）と終章があります。全<span data-r="pages">61</span>ページ（PDF）。</p>
+    <p class="src" id="srcLine"></p>
+  </div>
+</section>
+
+<section class="midcta">
+  <div class="wrap">
+    <p><span data-r="chapters">7</span>つの悩みと、<span data-r="companies">27</span>社の実例。<br>書き込める用紙<span data-r="sheets">3</span>枚つき。</p>
+    <a class="btn" href="#apply"><span>無料でPDFをダウンロード →</span></a>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <span class="eyebrow">中をのぞく</span>
+    <h2>実際のページ</h2>
+    <p class="swipe" style="display:none;margin:0 0 6px;font-size:13px;font-weight:800;color:var(--navy)">← 横にめくれます（4枚） →</p>
+    <div class="peeks peeks4">
+      <div class="peek"><figure>
+        <img class="shot" src="img/page_02.jpg" width="560" height="796" loading="lazy" alt="はじめに：このレポートの読み方と7つのジレンマの一覧">
+        <figcaption><b>7つのジレンマが1枚で分かる</b>「はじめに」で、7つの悩みと各章の流れ（担当者の一言→多くの会社の悩みである根拠→他社の乗り越え方→解決策の一つ）を示しています。</figcaption>
+      </figure></div>
+      <div class="peek"><figure>
+        <img class="shot" src="img/page_09.jpg" width="560" height="796" loading="lazy" alt="第1章：ヤマトホールディングスの事例のページ">
+        <figcaption><b>他社がやったことを、会社名と数字で</b>第1章より。ヤマトホールディングスが、なぜ社会貢献をするのかを自社の言葉でどう示したか。</figcaption>
+      </figure></div>
+      <div class="peek"><figure>
+        <img class="shot" src="img/page_25.jpg" width="560" height="796" loading="lazy" alt="第4章：ユーグレナの事例のページ">
+        <figcaption><b>各社が公開している図も、出典つきで</b>第4章より。ユーグレナが、子どもに何が変わったかをどう測ったか。</figcaption>
+      </figure></div>
+      <div class="peek"><figure>
+        <img class="shot" src="img/page_53.jpg" width="560" height="796" loading="lazy" alt="用紙B：社会貢献活動への社員の参加の壁チェック">
+        <figcaption><b>書き込める用紙<span data-r="sheets">3</span>枚</b>用紙B「社員が活動に参加しない理由を洗い出す1枚」。印刷して手で書けます。</figcaption>
+      </figure></div>
+    </div>
+    <ul class="sheets" id="sheetList"></ul>
+  </div>
+</section>
+
+<section class="sec reviews" id="reviews" hidden>
+  <div class="wrap">
+    <span class="eyebrow">読んだ方の評価</span>
+    <div class="rv-top"><span class="rv-avg" id="rvAvg"></span><span class="rv-stars" id="rvStars"></span><span class="src" id="rvMeta"></span></div>
+    <ul class="rv-list" id="rvList"></ul>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:20px">
+  <div class="wrap info">
+    <div>
+      <span class="eyebrow">事例に出てくる会社</span>
+      <details><summary><span data-r="companies">27</span>社の名前を見る</summary><div class="body" id="coList"></div></details>
+      <div class="pubbox"><b>発行：コネクティブ合同会社</b><br>経団連の調査（153社回答）と、各社が公開している統合報告書・サステナビリティの資料・Webページをもとに、会社名も数字もそのまま載せました。すべての数字に出典を付けています。</div>
+    </div>
+    <div>
+      <span class="eyebrow">よくある質問</span>
+      <dl class="faq">
+        <dt>本当に無料ですか？</dt><dd>はい。メールアドレスを入れると、その場でダウンロードが始まります。</dd>
+        <dt>個人のメールアドレスでも受け取れますか？</dt><dd>はい、受け取れます。</dd>
+        <dt>営業の連絡は来ませんか？</dt><dd>ダウンロード先をお知らせするメールを1通お送りするだけです。その後のお知らせは、チェックを入れた方にだけお送りします。</dd>
+        <dt>どう読めばいいですか？</dt><dd>気になる章から読めます。1章は5〜9ページです。巻末の用紙は印刷して手で書け、3枚のどれからでも始められます。</dd>
+        <dt>載っている会社とはどういう関係ですか？</dt><dd>各社が公開している資料から引いています。出典はすべて本文の注に載せています。</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="apply" id="apply">
+  <div class="wrap grid">
+    <div class="mini-cover"><img src="img/cover.png" width="720" height="1023" style="display:block;width:100%;height:auto" alt="表紙：企業フィランソロピーのジレンマ"></div>
+    <div>
+      <h2>無料でPDFをダウンロード</h2>
+      <p class="lead">メールアドレスを入れて送ると、その場でダウンロードが始まります（PDF・<span data-r="pages">61</span>ページ）。個人のアドレスでも受け取れます。</p>
+      <form class="dl-form" id="dlForm" novalidate>
+        <div class="field"><label for="email">メールアドレス</label><input type="email" id="email" name="email" autocomplete="email" inputmode="email" required></div>
+        <div class="hp" aria-hidden="true"><label>空欄のまま<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+        <label class="agree"><input type="checkbox" id="optin" name="optin" value="1"><span>白書の完成や、次のレポートのお知らせを受け取る（月1回まで。いつでも止められます）</span></label>
+        <button type="submit" class="btn" id="submitBtn"><span>無料でPDFをダウンロード</span></button>
+        <p class="err" id="err" role="alert"></p>
+        <p class="purpose">いただいたメールアドレスは、①ダウンロード先をお知らせするメールの送付 ②チェックを入れた方へのお知らせ ③お返事をいただいたときのやりとり ④読者の数などの集計に使います。くわしくは<a href="https://www.cnectv.com/%E3%83%97%E3%83%A9%E3%82%A4%E3%83%90%E3%82%B7%E3%83%BC%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC" target="_blank" rel="noopener">プライバシーポリシー</a>をご覧ください。</p>
+      </form>
+      <div class="done" id="done" role="status"><h3>ダウンロードを始めました</h3><p>始まらないときは <a class="dl" id="manualDl" href="dilemma.pdf" target="_blank" rel="noopener">こちらから</a> お受け取りください。</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>発行：コネクティブ合同会社　｜　<a href="https://www.cnectv.com/%E3%83%97%E3%83%A9%E3%82%A4%E3%83%90%E3%82%B7%E3%83%BC%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC" target="_blank" rel="noopener">プライバシーポリシー</a></footer>
+
+<div class="sticky" id="sticky"><a class="btn" href="#apply"><span>無料でPDFをダウンロード →</span></a></div>
+
+<script>
+/* ===== 設定 =====
+   ENDPOINT … 教科書のダウンロードページ（connective-pas-guide-dl.html）と同じGAS。送り方も同じ（投げっぱなし）。
+              第2弾の申込は source=dilemma_dl ／ kind=dilemma で見分ける。
+   PDF_URL  … このページと同じ場所に置く dilemma.pdf
+   REVIEW_ENDPOINT … 読んだ方の評価（星と感想）を返すGAS。今のGASには無いので空。空のあいだは評価の欄を出さない。 */
+var ENDPOINT = "https://script.google.com/macros/s/AKfycbzG-5-bQIEmo9OPZS_TbN6Qggp4S0V2i9FCSDR7xnIFMHFptBilyHQ1A1EEkKGZNbd3/exec";
+var PDF_URL  = "https://guide.cnectv.com/dilemma/dilemma.pdf";
+var REVIEW_ENDPOINT = "";
+var REVIEW_MIN = 10;
+
+(function(){
+  function esc(t){ return String(t).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];}); }
+
+  /* 章・用紙・会社の一覧（report.js から） */
+  var html = "";
+  REPORT.chapterList.forEach(function(c){
+    html += '<li class="ch"><span class="no" aria-label="第' + c.no + '章"><b>' + c.no + '</b>章</span><h3>' + esc(c.title) + '</h3>' +
+      '<p class="cos"><b>事例：</b>' + c.cos.map(esc).join("／") + '</p>' +
+      '<p class="sol"><b>解決策の一つ</b>' + esc(c.sol) + '</p></li>';
+  });
+  document.getElementById("chList").innerHTML = html;
+  document.getElementById("srcLine").textContent = "16の課題の出典：" + REPORT.survey + "。";
+  var sh = "";
+  REPORT.sheetList.forEach(function(s){ sh += '<li><b>用紙' + s.k + '</b>' + esc(s.t) + '</li>'; });
+  document.getElementById("sheetList").innerHTML = sh;
+  var co = "";
+  REPORT.chapterList.forEach(function(c){
+    co += '<p class="cogrp"><b>第' + c.no + '章（' + c.cos.length + '社）</b><span>' + c.cos.map(esc).join("／") + '</span></p>';
+  });
+  document.getElementById("coList").innerHTML = co;
+
+  /* 申込：教科書のページと同じ。GASへ投げっぱなしで送り、その場でPDFを落とす */
+  var route = new URLSearchParams(location.search).get("r") || "web";
+  var form = document.getElementById("dlForm");
+  document.getElementById("manualDl").href = PDF_URL;
+  form.addEventListener("submit", function(ev){
+    ev.preventDefault();
+    var err = document.getElementById("err"); err.textContent = "";
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.email.value.trim())){ err.textContent = "メールアドレスをご確認ください。"; form.email.focus(); return; }
+    var btn = document.getElementById("submitBtn"); btn.disabled = true;
+    if(form.website.value){ return; }   // 機械の送信（見えない欄に入力）は送らない
+
+    var data = new FormData(form);
+    data.delete("website");
+    data.set("optin", form.optin.checked ? "1" : "0");   // お知らせの同意。同意の日時は ts、文の版は consent_ver で残す（特定電子メール法3条2項）
+    data.append("consent_ver", "dilemma-optin-v1-2026-10-28");
+    data.append("source", "dilemma_dl");
+    data.append("kind", "dilemma");
+    data.append("route", route);
+    data.append("ts", new Date().toISOString());
+    try{ fetch(ENDPOINT, {method:"POST", mode:"no-cors", body:data}).catch(function(){}); }catch(e){}
+
+    setTimeout(function(){
+      try{
+        var a = document.createElement("a"); a.href = PDF_URL; a.download = "企業フィランソロピーのジレンマ.pdf"; a.target = "_blank";
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      }catch(e){ window.open(PDF_URL, "_blank"); }
+      form.style.display = "none";
+      document.getElementById("done").style.display = "block";
+    }, 250);
+  });
+
+  /* 読んだ方の評価：REVIEW_ENDPOINT が入り、件数が REVIEW_MIN を超えたときだけ出す */
+  if(REVIEW_ENDPOINT.indexOf("https://") === 0){
+    fetch(REVIEW_ENDPOINT + "?kind=reviews").then(function(r){ return r.json(); }).then(function(d){
+      if(!d || !(d.count > REVIEW_MIN) || !d.avg) return;
+      var full = Math.round(d.avg), st = "";
+      for(var i = 1; i <= 5; i++) st += i <= full ? "★" : "☆";
+      document.getElementById("rvAvg").textContent = Number(d.avg).toFixed(1);
+      document.getElementById("rvStars").textContent = st;
+      document.getElementById("rvMeta").textContent = d.count + "件（" + d.first + "〜" + d.last + "にいただいた評価のすべて）";
+      var li = "";
+      (d.items || []).slice(0, 6).forEach(function(it){
+        var s = ""; for(var j = 1; j <= 5; j++) s += j <= it.stars ? "★" : "☆";
+        li += '<li><div class="rv-stars" style="font-size:15px">' + s + '</div><div>' + esc(it.text) + '</div><div class="m">' + esc(it.date) + (it.attr ? "　" + esc(it.attr) : "") + '</div></li>';
+      });
+      document.getElementById("rvList").innerHTML = li;
+      document.getElementById("reviews").hidden = false;
+    }).catch(function(){});
+  }
+
+  /* スマホ下部の固定ボタン：最初の画面と最後の申込欄が見えている間は隠す */
+  var sticky = document.getElementById("sticky");
+  if("IntersectionObserver" in window){
+    var vis = {};
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ vis[e.target.id] = e.isIntersecting; });
+      sticky.classList.toggle("hide", !!(vis.top || vis.apply));
+    }, {threshold:0.1});
+    io.observe(document.getElementById("top")); io.observe(document.getElementById("apply"));
+  }
+})();
+</script>
+</body>
+</html>
