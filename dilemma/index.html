@@ -24,9 +24,9 @@
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
 body{margin:0; background:#fff; color:var(--ink); font-size:16px; line-height:1.75; overflow-x:hidden;
-  font-family:"Meiryo UI","Hiragino Sans","Noto Sans JP","Hiragino Kaku Gothic ProN",sans-serif}
+  font-family:"Meiryo UI","Meiryo","Hiragino Sans","Noto Sans JP","Hiragino Kaku Gothic ProN",sans-serif}
 h1,h2,h3,.say{word-break:auto-phrase}
-h1,h2,h3,.disp,.btn{font-family:"Hiragino Sans","Noto Sans JP","Meiryo UI",sans-serif}
+h1,h2,h3,.disp,.btn{font-family:"Meiryo UI","Meiryo","Hiragino Sans","Noto Sans JP",sans-serif}
 .wrap{max-width:1100px; margin:0 auto; padding:0 24px}
 .sec{padding:72px 0}
 .eyebrow{display:block; font-weight:800; font-size:14px; letter-spacing:.06em; color:var(--accent); margin-bottom:6px}
@@ -58,7 +58,7 @@ h2{font-size:32px; line-height:1.4; font-weight:900; margin:0 0 12px; color:var(
 .pts{grid-area:pts; list-style:none; padding:0; margin:0; display:flex; gap:10px; flex-wrap:wrap}
 .pts li{display:flex; align-items:baseline; gap:6px; background:var(--cream); border:2px solid var(--navy); border-radius:12px; padding:6px 12px;
   font-weight:800; font-size:14px; color:var(--navy)}
-.pts b{font-size:26px; line-height:1; font-family:"Hiragino Sans","Noto Sans JP",sans-serif}
+.pts b{font-size:26px; line-height:1; font-family:"Meiryo UI","Meiryo","Hiragino Sans","Noto Sans JP",sans-serif}
 .hero .form-wrap{grid-area:form}
 .hero .dl-form .row{flex-direction:column}
 .hero .dl-form .btn, .hero .dl-form input[type=email]{flex:none; width:100%}
@@ -116,7 +116,7 @@ h2{font-size:32px; line-height:1.4; font-weight:900; margin:0 0 12px; color:var(
 .ch .st{display:flex; align-items:center; gap:8px; margin-top:8px; font-size:12px; color:var(--sub); line-height:1.4}
 .ch .st .bar{flex:0 0 90px; height:8px; background:#EEF0F5; border-radius:4px; overflow:hidden}
 .ch .st .bar i{display:block; height:100%; background:var(--navy)}
-.ch .st b{font-size:15px; color:var(--navy); font-family:"Hiragino Sans","Noto Sans JP",sans-serif}
+.ch .st b{font-size:15px; color:var(--navy); font-family:"Meiryo UI","Meiryo","Hiragino Sans","Noto Sans JP",sans-serif}
 .ch-ends{margin-top:12px; font-size:13.5px; color:var(--sub)}
 
 /* ③ 中のCTA */
@@ -314,6 +314,11 @@ footer a{color:#fff}
 .done .one-t{font-size:14px;line-height:1.6;margin:0 0 10px}
 .done .one-form{padding:0;background:none;box-shadow:none;border:0}
 .done .one-ok{font-size:14px;font-weight:700;color:var(--navy);margin:10px 0 0}
+.done .one-target{background:var(--sky-l);border-radius:10px;padding:10px 12px;font-size:15px;margin:0 0 8px;color:var(--ink)}
+.done .one-alt{font-size:13px;margin:0}.done .one-alt a{color:var(--navy)}
+.done .one-sample{margin:0 0 12px}.done .one-sample img{display:block;width:100%;height:auto;border:1px solid #C9D3DB;border-radius:8px}
+.done .one-sample figcaption{font-size:12.5px;color:var(--sub);margin-top:4px}
+[hidden]{display:none!important}
 </style>
 <script type="application/ld+json">
 {
@@ -454,13 +459,19 @@ footer a{color:#fff}
         <p class="purpose">いただいたメールアドレスは、①ダウンロード先をお知らせするメールの送付 ②御社に合わせたご案内（3通まで）と月1回までのお知らせ ③お返事をいただいたときのやりとり ④読者の数などの集計に使います。くわしくは<a href="https://www.cnectv.com/%E3%83%97%E3%83%A9%E3%82%A4%E3%83%90%E3%82%B7%E3%83%BC%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC" target="_blank" rel="noopener">プライバシーポリシー</a>をご覧ください。</p>
       </form>
       <div class="done" id="done" role="status"><h3>ダウンロードを始めました</h3><p>始まらないときは <a class="dl" id="manualDl" href="dilemma.pdf" target="_blank" rel="noopener">こちらから</a> お受け取りください。</p>
-        <div class="one">
-          <p class="one-h">御社の1枚をお作りします（無料）</p>
-          <p class="one-t">御社の社会貢献が5つの形（渡す・人が動く・器をつくる・事業をつくる・本業に統合）のどこにあり、レポートの27社と比べて次に何を考えるとよいかを、公開されている資料をもとに1枚にまとめ、30分のオンラインでご説明します。会社名を入れていただくと、すぐに作り始めます（任意）。</p>
+        <div class="one" id="one">
+          <!-- 2026-11-09 v2：交換の形で聞く（任意の表示はやめる）。全員に同じ欄。
+               会社・団体のアドレスの人には、アドレスの後ろ（ドメイン）から推測したURLを欄に先に入れておき、合っていれば押すだけ。
+               個人・大学・官公庁のアドレスの人は空欄から入れる。送るのは今と同じ kind=dilemma_company・company（GASは直さない）。 -->
+          <p class="one-h" id="oneH">御社と同じ業種の4社を並べた1枚を、無料でお作りしてお送りします</p>
+          <p class="one-t" id="oneT">各社が社会貢献で公開している方針・額・社員の参加・届いた人の数を、同じ項目で並べた1枚です。お作りする会社を決めるため、会社名かホームページのURLを入れてください。</p>
+          <figure class="one-sample" id="oneSample"><img src="img/sample_anon.jpg" width="1200" height="848" alt="見本：食品のA社と、同じ業種の4社を同じ項目で並べた表（社名を伏せています）"><figcaption>見本（食品のA社。社名を伏せています）</figcaption></figure>
           <form class="dl-form one-form" id="coForm" novalidate>
-            <div class="field"><label for="company">会社名（任意）</label><input type="text" id="company" name="company" autocomplete="organization" placeholder="例：〇〇株式会社"></div>
-            <button type="submit" class="btn" id="coBtn"><span>この会社の1枚を頼む</span></button>
-            <p class="one-ok" id="coOk" role="status" hidden>承りました。1枚ができしだい、メールでお知らせします。</p>
+            <p class="one-target" id="coGuess" hidden>メールアドレスから <b id="coDomain"></b> と推測して入れました。合っていれば、そのまま押してください。違えば書き直してください。</p>
+            <div class="field"><label for="company" id="coLabel">会社名、またはホームページのURL</label><input type="text" id="company" name="company" autocomplete="organization" placeholder="例：〇〇株式会社　または　https://www.〇〇.co.jp" required></div>
+            <button type="submit" class="btn" id="coBtn"><span id="coBtnT">この会社の1枚を受け取る</span></button>
+            <p class="err" id="coErr" role="alert"></p>
+            <p class="one-ok" id="coOk" role="status" hidden>承りました。1枚ができしだい、いただいたメールアドレスにお送りします。</p>
           </form>
         </div>
       </div>
@@ -536,15 +547,44 @@ var REVIEW_MIN = 10;
         document.body.appendChild(a); a.click(); document.body.removeChild(a);
       }catch(e){ window.open(PDF_URL, "_blank"); }
       form.style.display = "none";
+      showOne(form.email.value.trim());
       document.getElementById("done").style.display = "block";
     }, 250);
   });
 
-  /* お礼の画面：会社名（任意）を送る。kind=dilemma_company（GASは自動返信を送らず、同じメールの行に会社名を足す） */
+  /* お礼の画面（2026-11-09 v2・交換の形）：アドレスの後ろ（ドメイン）で会社を推測し、欄に先に入れる。
+     会社のアドレス→入力なしで、そのドメインのホームページの会社で1枚を作る（直したい人だけ入力）。
+     個人のアドレス→URLか会社名のどちらか1つを聞く。団体らしいアドレス（or.jp など）→団体向けの言葉にする。
+     送るのは今と同じ kind=dilemma_company・company 欄だけ（GASは直さない）。ドメインは申込の行のメールから読む。 */
+  var FREE = ["gmail.com","googlemail.com","yahoo.co.jp","ymail.ne.jp","yahoo.com","icloud.com","me.com","mac.com",
+    "outlook.com","outlook.jp","hotmail.com","hotmail.co.jp","live.jp","live.com","msn.com","docomo.ne.jp","ezweb.ne.jp",
+    "au.com","softbank.ne.jp","i.softbank.jp","nifty.com","biglobe.ne.jp","so-net.ne.jp","ocn.ne.jp","plala.or.jp",
+    "aol.com","proton.me","protonmail.com","zoho.com"];
+  function isFree(d){ return FREE.some(function(f){ return d === f || d.slice(-(f.length + 1)) === "." + f; }); }
+  function isOrg(d){ return /\.or\.jp$|\.(org|ngo)$/.test(d); }
+  function isPublic(d){ return /\.(go|lg|ac|ed)\.jp$|\.(edu|gov)$/.test(d); }   // 大学・官公庁：会社でも団体でもないので聞く
   var coForm = document.getElementById("coForm");
+  function showOne(email){
+    var d = (email.split("@")[1] || "").toLowerCase();
+    var known = d && !isFree(d) && !isPublic(d);
+    if(known && isOrg(d)){   // 団体のアドレス：団体向けの言葉にし、企業の見本は出さない
+      document.getElementById("oneH").textContent = "貴団体の活動に近い分野で、企業がどんな社会貢献を公開しているかをまとめてお送りします（無料）";
+      document.getElementById("oneT").textContent = "お作りする先を決めるため、団体名かホームページのURLを入れてください。";
+      document.getElementById("oneSample").hidden = true;
+      document.getElementById("coLabel").textContent = "団体名、またはホームページのURL";
+      document.getElementById("coBtnT").textContent = "この団体あてに受け取る";
+    }
+    if(known){   // 会社・団体のアドレス：推測したURLを先に入れておく（合っていれば押すだけ）
+      coForm.company.value = "https://" + d;
+      document.getElementById("coDomain").textContent = "https://" + d;
+      document.getElementById("coGuess").hidden = false;
+    }
+  }
+  window.showOne = showOne;
   coForm.addEventListener("submit", function(ev){
     ev.preventDefault();
-    var co = coForm.company.value.trim(); if(!co){ coForm.company.focus(); return; }
+    var co = coForm.company.value.trim(), er = document.getElementById("coErr"); er.textContent = "";
+    if(!co){ er.textContent = "1枚をお作りする会社を決めるために使います。会社名かURLを入れてください。"; coForm.company.focus(); return; }
     var d = new URLSearchParams();
     d.append("kind","dilemma_company"); d.append("source","dilemma_dl"); d.append("email", form.email.value.trim());
     d.append("company", co); d.append("route", route); d.append("ts", new Date().toISOString());
