@@ -308,6 +308,12 @@ footer a{color:#fff}
   .dl-form .grid2{grid-template-columns:1fr; gap:8px}
   .hero .cta .help{font-size:12px}
 }
+.dl-form .notice{background:#fff7e6;border:2px solid #e0a040;border-radius:10px;padding:12px 14px;font-size:15px;font-weight:700;line-height:1.6;margin:0 0 14px;color:#1a1a1a}
+.done .one{margin-top:14px;border-top:1px solid #ddd;padding-top:14px}
+.done .one-h{font-weight:700;font-size:16px;margin:0 0 6px}
+.done .one-t{font-size:14px;line-height:1.6;margin:0 0 10px}
+.done .one-form{padding:0;background:none;box-shadow:none;border:0}
+.done .one-ok{font-size:14px;font-weight:700;color:var(--navy);margin:10px 0 0}
 </style>
 <script type="application/ld+json">
 {
@@ -425,7 +431,7 @@ footer a{color:#fff}
       <dl class="faq">
         <dt>本当に無料ですか？</dt><dd>はい。メールアドレスを入れると、その場でダウンロードが始まります。</dd>
         <dt>個人のメールアドレスでも受け取れますか？</dt><dd>はい、受け取れます。</dd>
-        <dt>営業の連絡は来ませんか？</dt><dd>ダウンロード先をお知らせするメールを1通お送りするだけです。その後のお知らせは、チェックを入れた方にだけお送りします。</dd>
+        <dt>営業の連絡は来ませんか？</dt><dd>御社の社会貢献を1枚にまとめるご案内を、3通までお送りします。そのあとは月1回までのお知らせです。不要でしたら「停止」とご返信ください。すぐに止めます。</dd>
         <dt>どう読めばいいですか？</dt><dd>気になる章から読めます。1章は5〜9ページです。巻末の用紙は印刷して手で書け、3枚のどれからでも始められます。</dd>
         <dt>載っている会社とはどういう関係ですか？</dt><dd>各社が公開している資料から引いています。出典はすべて本文の注に載せています。</dd>
       </dl>
@@ -440,14 +446,24 @@ footer a{color:#fff}
       <h2>無料でPDFをダウンロード</h2>
       <p class="lead">メールアドレスを入れて送ると、その場でダウンロードが始まります（PDF・<span data-r="pages">61</span>ページ）。個人のアドレスでも受け取れます。</p>
       <form class="dl-form" id="dlForm" novalidate>
+        <p class="notice">ダウンロードのあと、御社に合わせた1枚のご案内などを、メールで3通までお送りします。そのあとは月1回までのお知らせです。どれも返信でいつでも止められます。</p>
         <div class="field"><label for="email">メールアドレス</label><input type="email" id="email" name="email" autocomplete="email" inputmode="email" required></div>
         <div class="hp" aria-hidden="true"><label>空欄のまま<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
-        <label class="agree"><input type="checkbox" id="optin" name="optin" value="1"><span>白書の完成や、次のレポートのお知らせを受け取る（月1回まで。いつでも止められます）</span></label>
         <button type="submit" class="btn" id="submitBtn"><span>無料でPDFをダウンロード</span></button>
         <p class="err" id="err" role="alert"></p>
-        <p class="purpose">いただいたメールアドレスは、①ダウンロード先をお知らせするメールの送付 ②チェックを入れた方へのお知らせ ③お返事をいただいたときのやりとり ④読者の数などの集計に使います。くわしくは<a href="https://www.cnectv.com/%E3%83%97%E3%83%A9%E3%82%A4%E3%83%90%E3%82%B7%E3%83%BC%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC" target="_blank" rel="noopener">プライバシーポリシー</a>をご覧ください。</p>
+        <p class="purpose">いただいたメールアドレスは、①ダウンロード先をお知らせするメールの送付 ②御社に合わせたご案内（3通まで）と月1回までのお知らせ ③お返事をいただいたときのやりとり ④読者の数などの集計に使います。くわしくは<a href="https://www.cnectv.com/%E3%83%97%E3%83%A9%E3%82%A4%E3%83%90%E3%82%B7%E3%83%BC%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC" target="_blank" rel="noopener">プライバシーポリシー</a>をご覧ください。</p>
       </form>
-      <div class="done" id="done" role="status"><h3>ダウンロードを始めました</h3><p>始まらないときは <a class="dl" id="manualDl" href="dilemma.pdf" target="_blank" rel="noopener">こちらから</a> お受け取りください。</p></div>
+      <div class="done" id="done" role="status"><h3>ダウンロードを始めました</h3><p>始まらないときは <a class="dl" id="manualDl" href="dilemma.pdf" target="_blank" rel="noopener">こちらから</a> お受け取りください。</p>
+        <div class="one">
+          <p class="one-h">御社の1枚をお作りします（無料）</p>
+          <p class="one-t">御社の社会貢献が5つの形（渡す・人が動く・器をつくる・事業をつくる・本業に統合）のどこにあり、レポートの27社と比べて次に何を考えるとよいかを、公開されている資料をもとに1枚にまとめ、30分のオンラインでご説明します。会社名を入れていただくと、すぐに作り始めます（任意）。</p>
+          <form class="dl-form one-form" id="coForm" novalidate>
+            <div class="field"><label for="company">会社名（任意）</label><input type="text" id="company" name="company" autocomplete="organization" placeholder="例：〇〇株式会社"></div>
+            <button type="submit" class="btn" id="coBtn"><span>この会社の1枚を頼む</span></button>
+            <p class="one-ok" id="coOk" role="status" hidden>承りました。1枚ができしだい、メールでお知らせします。</p>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -501,8 +517,8 @@ var REVIEW_MIN = 10;
 
     var data = new FormData(form);
     data.delete("website");
-    data.set("optin", form.optin.checked ? "1" : "0");   // お知らせの同意。同意の日時は ts、文の版は consent_ver で残す（特定電子メール法3条2項）
-    data.append("consent_ver", "dilemma-optin-v1-2026-10-28");
+    data.set("optin", "1");   // フォームのすぐ上の表示（3通まで・そのあと月1回まで）に同意して送った。同意の日時は ts、文の版は consent_ver で残す（特定電子メール法3条2項。2026-11-09 社長了承）
+    data.append("consent_ver", "dilemma-3mails-v1-2026-11-09");
     data.append("source", "dilemma_dl");
     data.append("kind", "dilemma");
     data.append("route", route);
@@ -522,6 +538,18 @@ var REVIEW_MIN = 10;
       form.style.display = "none";
       document.getElementById("done").style.display = "block";
     }, 250);
+  });
+
+  /* お礼の画面：会社名（任意）を送る。kind=dilemma_company（GASは自動返信を送らず、同じメールの行に会社名を足す） */
+  var coForm = document.getElementById("coForm");
+  coForm.addEventListener("submit", function(ev){
+    ev.preventDefault();
+    var co = coForm.company.value.trim(); if(!co){ coForm.company.focus(); return; }
+    var d = new URLSearchParams();
+    d.append("kind","dilemma_company"); d.append("source","dilemma_dl"); d.append("email", form.email.value.trim());
+    d.append("company", co); d.append("route", route); d.append("ts", new Date().toISOString());
+    try{ fetch(ENDPOINT, {method:"POST", mode:"no-cors", keepalive:true, body:d}).catch(function(){}); }catch(e){}
+    document.getElementById("coBtn").disabled = true; document.getElementById("coOk").hidden = false;
   });
 
   /* 読んだ方の評価：REVIEW_ENDPOINT が入り、件数が REVIEW_MIN を超えたときだけ出す */
