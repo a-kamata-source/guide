@@ -310,6 +310,14 @@ footer a{color:#fff}
 }
 .dl-form .notice{background:#fff7e6;border:2px solid #e0a040;border-radius:10px;padding:12px 14px;font-size:15px;font-weight:700;line-height:1.6;margin:0 0 14px;color:#1a1a1a}
 .done .one{margin-top:14px;border-top:1px solid #ddd;padding-top:14px}
+.done .one-kind{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px;padding:0;border:0;min-width:0}
+.done .one-kind legend{font-size:14px;font-weight:700;margin:0 0 6px;padding:0;color:var(--ink)}
+.done .kind-btn{flex:1 1 200px;min-height:44px;font-family:inherit;font-size:15px;font-weight:700;line-height:1.45;text-align:left;cursor:pointer;
+  padding:10px 14px 10px 38px;border:2px solid var(--navy);border-radius:10px;background:#fff;color:var(--navy);position:relative}
+.done .kind-btn::before{content:"";position:absolute;left:12px;top:50%;width:16px;height:16px;margin-top:-8px;border:2px solid var(--navy);border-radius:50%;background:#fff;box-sizing:border-box}
+.done .kind-btn[aria-pressed="true"]{background:var(--navy);color:#fff}
+.done .kind-btn[aria-pressed="true"]::before{border-color:#fff;background:var(--lemon);box-shadow:inset 0 0 0 3px var(--navy)}
+.done .kind-btn:focus-visible{outline:3px solid var(--lemon);outline-offset:2px;box-shadow:0 0 0 5px var(--navy)}
 .done .one-h{font-weight:700;font-size:16px;margin:0 0 6px}
 .done .one-t{font-size:14px;line-height:1.6;margin:0 0 10px}
 .done .one-form{padding:0;background:none;box-shadow:none;border:0}
@@ -463,6 +471,13 @@ footer a{color:#fff}
           <!-- 2026-11-09 v2：交換の形で聞く（任意の表示はやめる）。全員に同じ欄。
                会社・団体のアドレスの人には、アドレスの後ろ（ドメイン）から推測したURLを欄に先に入れておき、合っていれば押すだけ。
                個人・大学・官公庁のアドレスの人は空欄から入れる。送るのは今と同じ kind=dilemma_company・company（GASは直さない）。 -->
+          <!-- 2026-11-10 v6：会社の方／非営利組織の方を選ぶ2つのボタン（08_3つの分岐 v1 の6章。社長了承）。
+               選んだほうの言葉と見本に切り替える。非営利組織は company の頭に「非営利：」を付けて送る（GASは直さない）。 -->
+          <fieldset class="one-kind" id="oneKind">
+            <legend>どちらにあたりますか</legend>
+            <button type="button" class="kind-btn" id="kindCo" data-kind="co" aria-pressed="true">会社の方</button>
+            <button type="button" class="kind-btn" id="kindNp" data-kind="np" aria-pressed="false">非営利組織（NPO法人・財団法人・社団法人など）の方</button>
+          </fieldset>
           <p class="one-h" id="oneH">御社と同じ業種の4社を並べた1枚を、無料でお作りしてお送りします</p>
           <p class="one-t" id="oneT">各社が社会貢献で公開している方針・額・社員の参加・届いた人の数を、同じ項目で並べた1枚です。お作りする会社を決めるため、会社名かホームページのURLを入れてください。</p>
           <figure class="one-sample" id="oneSample"><img src="img/sample_anon.jpg" width="1200" height="848" alt="見本：食品のA社と、同じ業種の4社を同じ項目で並べた表（社名を伏せています）"><figcaption>見本（食品のA社。社名を伏せています）</figcaption></figure>
@@ -564,16 +579,39 @@ var REVIEW_MIN = 10;
   function isOrg(d){ return /\.or\.jp$|\.(org|ngo)$/.test(d); }
   function isPublic(d){ return /\.(go|lg|ac|ed)\.jp$|\.(edu|gov)$/.test(d); }   // 大学・官公庁：会社でも団体でもないので聞く
   var coForm = document.getElementById("coForm");
+  /* 2026-11-10 v6：会社の方／非営利組織の方の切り替え。会社の文は最初の画面から覚えておき、戻したときに元へ戻す */
+  var KIND_IDS = ["oneH","oneT","coLabel","coBtnT","coOk"];
+  var CO_TEXT = {}; KIND_IDS.forEach(function(id){ CO_TEXT[id] = document.getElementById(id).textContent; });
+  CO_TEXT.ph = coForm.company.getAttribute("placeholder");
+  CO_TEXT.err = "1枚をお作りする会社を決めるために使います。会社名かURLを入れてください。";
+  var NP_TEXT = {
+    oneH: "NPO法人・財団法人・社団法人などの非営利組織の方には、お立場に合わせた見本をお送りします（無料）",
+    oneT: "助成先・支援先を選ぶ方にはNPO法人の一覧と調査報告書のサンプルを、企業からのご支援を集める方には法人の診断レポートの見本をお送りします。お送りするものを決めるため、法人名かホームページのURLを入れてください。",
+    coLabel: "法人名、またはホームページのURL",
+    ph: "例：特定非営利活動法人〇〇　または　https://www.〇〇.or.jp",
+    coBtnT: "この法人あてに受け取る",
+    err: "見本をお送りする先を確かめるために使います。法人名かURLを入れてください。",
+    coOk: "承りました。法人を確かめて、見本をいただいたメールアドレスにお送りします。"
+  };
+  var kind = "co";
+  function setKind(k){
+    kind = (k === "np") ? "np" : "co";
+    var t = kind === "np" ? NP_TEXT : CO_TEXT;
+    KIND_IDS.forEach(function(id){ document.getElementById(id).textContent = t[id]; });
+    coForm.company.setAttribute("placeholder", t.ph);
+    document.getElementById("oneSample").hidden = (kind === "np");
+    document.getElementById("kindCo").setAttribute("aria-pressed", kind === "co" ? "true" : "false");
+    document.getElementById("kindNp").setAttribute("aria-pressed", kind === "np" ? "true" : "false");
+    var er = document.getElementById("coErr"); if(er.textContent) er.textContent = t.err;
+  }
+  ["kindCo","kindNp"].forEach(function(id){
+    document.getElementById(id).addEventListener("click", function(){ setKind(this.getAttribute("data-kind")); });
+  });
+  window.setKind = setKind;
   function showOne(email){
     var d = (email.split("@")[1] || "").toLowerCase();
     var known = d && !isFree(d) && !isPublic(d);
-    if(known && isOrg(d)){   // 団体のアドレス：団体向けの言葉にし、企業の見本は出さない
-      document.getElementById("oneH").textContent = "貴団体の活動に近い分野で、企業がどんな社会貢献を公開しているかをまとめてお送りします（無料）";
-      document.getElementById("oneT").textContent = "お作りする先を決めるため、団体名かホームページのURLを入れてください。";
-      document.getElementById("oneSample").hidden = true;
-      document.getElementById("coLabel").textContent = "団体名、またはホームページのURL";
-      document.getElementById("coBtnT").textContent = "この団体あてに受け取る";
-    }
+    setKind(known && isOrg(d) ? "np" : "co");   // .or.jp・.org・.ngo のアドレスは非営利組織を選んだ状態にする
     if(known){   // 会社・団体のアドレス：推測したURLを先に入れておく（合っていれば押すだけ）
       coForm.company.value = "https://" + d;
       document.getElementById("coDomain").textContent = "https://" + d;
@@ -584,10 +622,10 @@ var REVIEW_MIN = 10;
   coForm.addEventListener("submit", function(ev){
     ev.preventDefault();
     var co = coForm.company.value.trim(), er = document.getElementById("coErr"); er.textContent = "";
-    if(!co){ er.textContent = "1枚をお作りする会社を決めるために使います。会社名かURLを入れてください。"; coForm.company.focus(); return; }
+    if(!co){ er.textContent = (kind === "np" ? NP_TEXT : CO_TEXT).err; coForm.company.focus(); return; }
     var d = new URLSearchParams();
     d.append("kind","dilemma_company"); d.append("source","dilemma_dl"); d.append("email", form.email.value.trim());
-    d.append("company", co); d.append("route", route); d.append("ts", new Date().toISOString());
+    d.append("company", (kind === "np" ? "非営利：" : "") + co); d.append("route", route); d.append("ts", new Date().toISOString());
     try{ fetch(ENDPOINT, {method:"POST", mode:"no-cors", keepalive:true, body:d}).catch(function(){}); }catch(e){}
     document.getElementById("coBtn").disabled = true; document.getElementById("coOk").hidden = false;
   });
