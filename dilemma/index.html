@@ -468,13 +468,6 @@ footer a{color:#fff}
       </form>
       <div class="done" id="done" role="status"><h3>ダウンロードを始めました</h3><p>始まらないときは <a class="dl" id="manualDl" href="dilemma.pdf" target="_blank" rel="noopener">こちらから</a> お受け取りください。</p>
         <div class="one" id="one">
-          <!-- 2026-11-09 v2：交換の形で聞く（任意の表示はやめる）。全員に同じ欄。
-               会社・団体のアドレスの人には、アドレスの後ろ（ドメイン）から推測したURLを欄に先に入れておき、合っていれば押すだけ。
-               個人・大学・官公庁のアドレスの人は空欄から入れる。送るのは今と同じ kind=dilemma_company・company（GASは直さない）。 -->
-          <!-- 2026-11-10 v6：会社の方／非営利組織の方を選ぶ2つのボタン（08_3つの分岐 v1 の6章。社長了承）。
-               選んだほうの言葉と見本に切り替える。非営利組織は company の頭に「非営利：」を付けて送る（GASは直さない）。 -->
-          <!-- 2026-11-11 v7：会社の方に「同業4社を並べた1枚」を約束していた欄・見本・切り替えボタンを外した（作る道具が無い。社長 11/11「今日外す」）。
-               非営利組織の方への見本の案内だけ残す。 -->
           <p class="one-h" id="oneH">NPO法人・財団法人・社団法人などの非営利組織の方には、お立場に合わせた見本をお送りします（無料）</p>
           <p class="one-t" id="oneT">助成先・支援先を選ぶ方にはNPO法人の一覧と調査報告書のサンプルを、企業からのご支援を集める方には法人の診断レポートの見本をお送りします。お送りするものを決めるため、法人名かホームページのURLを入れてください。</p>
           <form class="dl-form one-form" id="coForm" novalidate>
@@ -563,10 +556,7 @@ var REVIEW_MIN = 10;
     }, 250);
   });
 
-  /* お礼の画面（2026-11-09 v2・交換の形）：アドレスの後ろ（ドメイン）で会社を推測し、欄に先に入れる。
-     会社のアドレス→入力なしで、そのドメインのホームページの会社で1枚を作る（直したい人だけ入力）。
-     個人のアドレス→URLか会社名のどちらか1つを聞く。団体らしいアドレス（or.jp など）→団体向けの言葉にする。
-     送るのは今と同じ kind=dilemma_company・company 欄だけ（GASは直さない）。ドメインは申込の行のメールから読む。 */
+  /* お礼の画面：アドレスの後ろ（ドメイン）で法人を推測し、欄に先に入れる */
   var FREE = ["gmail.com","googlemail.com","yahoo.co.jp","ymail.ne.jp","yahoo.com","icloud.com","me.com","mac.com",
     "outlook.com","outlook.jp","hotmail.com","hotmail.co.jp","live.jp","live.com","msn.com","docomo.ne.jp","ezweb.ne.jp",
     "au.com","softbank.ne.jp","i.softbank.jp","nifty.com","biglobe.ne.jp","so-net.ne.jp","ocn.ne.jp","plala.or.jp",
@@ -575,8 +565,6 @@ var REVIEW_MIN = 10;
   function isOrg(d){ return /\.or\.jp$|\.(org|ngo)$/.test(d); }
   function isPublic(d){ return /\.(go|lg|ac|ed)\.jp$|\.(edu|gov)$/.test(d); }   // 大学・官公庁：会社でも団体でもないので聞く
   var coForm = document.getElementById("coForm");
-  /* 2026-11-10 v6：会社の方／非営利組織の方の切り替え。会社の文は最初の画面から覚えておき、戻したときに元へ戻す */
-  /* 2026-11-11 v7：会社の方への1枚の約束を外し、非営利組織の方への見本の案内だけにした（社長 11/11「今日外す」） */
   var NP_ERR = "見本をお送りする先を確かめるために使います。法人名かURLを入れてください。";
   function showOne(email){
     var d = (email.split("@")[1] || "").toLowerCase();
