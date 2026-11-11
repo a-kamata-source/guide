@@ -540,7 +540,7 @@ var REVIEW_MIN = 10;
     var data = new FormData(form);
     data.delete("website");
     data.set("optin", "1");   // フォームのすぐ上の表示（3通まで・そのあと月1回まで）に同意して送った。同意の日時は ts、文の版は consent_ver で残す（特定電子メール法3条2項。2026-11-09 社長了承）
-    data.append("consent_ver", "dilemma-3mails-v1-2026-11-09");
+    data.append("consent_ver", "dilemma-3mails-v2-2026-11-11");
     data.append("source", "dilemma_dl");
     data.append("kind", "dilemma");
     data.append("route", route);
