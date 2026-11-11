@@ -444,7 +444,7 @@ footer a{color:#fff}
       <dl class="faq">
         <dt>本当に無料ですか？</dt><dd>はい。メールアドレスを入れると、その場でダウンロードが始まります。</dd>
         <dt>個人のメールアドレスでも受け取れますか？</dt><dd>はい、受け取れます。</dd>
-        <dt>営業の連絡は来ませんか？</dt><dd>御社の社会貢献を1枚にまとめるご案内を、3通までお送りします。そのあとは月1回までのお知らせです。不要でしたら「停止」とご返信ください。すぐに止めます。</dd>
+        <dt>営業の連絡は来ませんか？</dt><dd>ご案内を3通までお送りします。そのあとは月1回までのお知らせです。不要でしたら「停止」とご返信ください。すぐに止めます。</dd>
         <dt>どう読めばいいですか？</dt><dd>気になる章から読めます。1章は5〜9ページです。巻末の用紙は印刷して手で書け、3枚のどれからでも始められます。</dd>
         <dt>載っている会社とはどういう関係ですか？</dt><dd>各社が公開している資料から引いています。出典はすべて本文の注に載せています。</dd>
       </dl>
@@ -459,12 +459,12 @@ footer a{color:#fff}
       <h2>無料でPDFをダウンロード</h2>
       <p class="lead">メールアドレスを入れて送ると、その場でダウンロードが始まります（PDF・<span data-r="pages">61</span>ページ）。個人のアドレスでも受け取れます。</p>
       <form class="dl-form" id="dlForm" novalidate>
-        <p class="notice">ダウンロードのあと、御社に合わせた1枚のご案内などを、メールで3通までお送りします。そのあとは月1回までのお知らせです。どれも返信でいつでも止められます。</p>
+        <p class="notice">ダウンロードのあと、ご案内をメールで3通までお送りします。そのあとは月1回までのお知らせです。どれも返信でいつでも止められます。</p>
         <div class="field"><label for="email">メールアドレス</label><input type="email" id="email" name="email" autocomplete="email" inputmode="email" required></div>
         <div class="hp" aria-hidden="true"><label>空欄のまま<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
         <button type="submit" class="btn" id="submitBtn"><span>無料でPDFをダウンロード</span></button>
         <p class="err" id="err" role="alert"></p>
-        <p class="purpose">いただいたメールアドレスは、①ダウンロード先をお知らせするメールの送付 ②御社に合わせたご案内（3通まで）と月1回までのお知らせ ③お返事をいただいたときのやりとり ④読者の数などの集計に使います。くわしくは<a href="https://www.cnectv.com/%E3%83%97%E3%83%A9%E3%82%A4%E3%83%90%E3%82%B7%E3%83%BC%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC" target="_blank" rel="noopener">プライバシーポリシー</a>をご覧ください。</p>
+        <p class="purpose">いただいたメールアドレスは、①ダウンロード先をお知らせするメールの送付 ②ご案内（3通まで）と月1回までのお知らせ ③お返事をいただいたときのやりとり ④読者の数などの集計に使います。くわしくは<a href="https://www.cnectv.com/%E3%83%97%E3%83%A9%E3%82%A4%E3%83%90%E3%82%B7%E3%83%BC%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC" target="_blank" rel="noopener">プライバシーポリシー</a>をご覧ください。</p>
       </form>
       <div class="done" id="done" role="status"><h3>ダウンロードを始めました</h3><p>始まらないときは <a class="dl" id="manualDl" href="dilemma.pdf" target="_blank" rel="noopener">こちらから</a> お受け取りください。</p>
         <div class="one" id="one">
@@ -473,20 +473,16 @@ footer a{color:#fff}
                個人・大学・官公庁のアドレスの人は空欄から入れる。送るのは今と同じ kind=dilemma_company・company（GASは直さない）。 -->
           <!-- 2026-11-10 v6：会社の方／非営利組織の方を選ぶ2つのボタン（08_3つの分岐 v1 の6章。社長了承）。
                選んだほうの言葉と見本に切り替える。非営利組織は company の頭に「非営利：」を付けて送る（GASは直さない）。 -->
-          <fieldset class="one-kind" id="oneKind">
-            <legend>どちらにあたりますか</legend>
-            <button type="button" class="kind-btn" id="kindCo" data-kind="co" aria-pressed="true">民間企業（営利企業）の方</button>
-            <button type="button" class="kind-btn" id="kindNp" data-kind="np" aria-pressed="false">非営利組織（NPO法人・財団法人・社団法人など）の方</button>
-          </fieldset>
-          <p class="one-h" id="oneH">御社と同じ業種の4社を並べた1枚を、無料でお作りしてお送りします</p>
-          <p class="one-t" id="oneT">各社が社会貢献で公開している方針・額・社員の参加・届いた人の数を、同じ項目で並べた1枚です。お作りする会社を決めるため、会社名かホームページのURLを入れてください。</p>
-          <figure class="one-sample" id="oneSample"><img src="img/sample_anon.jpg" width="1200" height="848" alt="見本：食品のA社と、同じ業種の4社を同じ項目で並べた表（社名を伏せています）"><figcaption>見本（食品のA社。社名を伏せています）</figcaption></figure>
+          <!-- 2026-11-11 v7：会社の方に「同業4社を並べた1枚」を約束していた欄・見本・切り替えボタンを外した（作る道具が無い。社長 11/11「今日外す」）。
+               非営利組織の方への見本の案内だけ残す。 -->
+          <p class="one-h" id="oneH">NPO法人・財団法人・社団法人などの非営利組織の方には、お立場に合わせた見本をお送りします（無料）</p>
+          <p class="one-t" id="oneT">助成先・支援先を選ぶ方にはNPO法人の一覧と調査報告書のサンプルを、企業からのご支援を集める方には法人の診断レポートの見本をお送りします。お送りするものを決めるため、法人名かホームページのURLを入れてください。</p>
           <form class="dl-form one-form" id="coForm" novalidate>
             <p class="one-target" id="coGuess" hidden>メールアドレスから <b id="coDomain"></b> と推測して入れました。合っていれば、そのまま押してください。違えば書き直してください。</p>
-            <div class="field"><label for="company" id="coLabel">会社名、またはホームページのURL</label><input type="text" id="company" name="company" autocomplete="organization" placeholder="例：〇〇株式会社　または　https://www.〇〇.co.jp" required></div>
-            <button type="submit" class="btn" id="coBtn"><span id="coBtnT">この会社の1枚を受け取る</span></button>
+            <div class="field"><label for="company" id="coLabel">法人名、またはホームページのURL</label><input type="text" id="company" name="company" autocomplete="organization" placeholder="例：特定非営利活動法人〇〇　または　https://www.〇〇.or.jp" required></div>
+            <button type="submit" class="btn" id="coBtn"><span id="coBtnT">この法人あてに受け取る</span></button>
             <p class="err" id="coErr" role="alert"></p>
-            <p class="one-ok" id="coOk" role="status" hidden>承りました。1枚ができしだい、いただいたメールアドレスにお送りします。</p>
+            <p class="one-ok" id="coOk" role="status" hidden>承りました。法人を確かめて、見本をいただいたメールアドレスにお送りします。</p>
           </form>
         </div>
       </div>
@@ -580,39 +576,12 @@ var REVIEW_MIN = 10;
   function isPublic(d){ return /\.(go|lg|ac|ed)\.jp$|\.(edu|gov)$/.test(d); }   // 大学・官公庁：会社でも団体でもないので聞く
   var coForm = document.getElementById("coForm");
   /* 2026-11-10 v6：会社の方／非営利組織の方の切り替え。会社の文は最初の画面から覚えておき、戻したときに元へ戻す */
-  var KIND_IDS = ["oneH","oneT","coLabel","coBtnT","coOk"];
-  var CO_TEXT = {}; KIND_IDS.forEach(function(id){ CO_TEXT[id] = document.getElementById(id).textContent; });
-  CO_TEXT.ph = coForm.company.getAttribute("placeholder");
-  CO_TEXT.err = "1枚をお作りする会社を決めるために使います。会社名かURLを入れてください。";
-  var NP_TEXT = {
-    oneH: "NPO法人・財団法人・社団法人などの非営利組織の方には、お立場に合わせた見本をお送りします（無料）",
-    oneT: "助成先・支援先を選ぶ方にはNPO法人の一覧と調査報告書のサンプルを、企業からのご支援を集める方には法人の診断レポートの見本をお送りします。お送りするものを決めるため、法人名かホームページのURLを入れてください。",
-    coLabel: "法人名、またはホームページのURL",
-    ph: "例：特定非営利活動法人〇〇　または　https://www.〇〇.or.jp",
-    coBtnT: "この法人あてに受け取る",
-    err: "見本をお送りする先を確かめるために使います。法人名かURLを入れてください。",
-    coOk: "承りました。法人を確かめて、見本をいただいたメールアドレスにお送りします。"
-  };
-  var kind = "co";
-  function setKind(k){
-    kind = (k === "np") ? "np" : "co";
-    var t = kind === "np" ? NP_TEXT : CO_TEXT;
-    KIND_IDS.forEach(function(id){ document.getElementById(id).textContent = t[id]; });
-    coForm.company.setAttribute("placeholder", t.ph);
-    document.getElementById("oneSample").hidden = (kind === "np");
-    document.getElementById("kindCo").setAttribute("aria-pressed", kind === "co" ? "true" : "false");
-    document.getElementById("kindNp").setAttribute("aria-pressed", kind === "np" ? "true" : "false");
-    var er = document.getElementById("coErr"); if(er.textContent) er.textContent = t.err;
-  }
-  ["kindCo","kindNp"].forEach(function(id){
-    document.getElementById(id).addEventListener("click", function(){ setKind(this.getAttribute("data-kind")); });
-  });
-  window.setKind = setKind;
+  /* 2026-11-11 v7：会社の方への1枚の約束を外し、非営利組織の方への見本の案内だけにした（社長 11/11「今日外す」） */
+  var NP_ERR = "見本をお送りする先を確かめるために使います。法人名かURLを入れてください。";
   function showOne(email){
     var d = (email.split("@")[1] || "").toLowerCase();
-    var known = d && !isFree(d) && !isPublic(d);
-    setKind(known && isOrg(d) ? "np" : "co");   // .or.jp・.org・.ngo のアドレスは非営利組織を選んだ状態にする
-    if(known){   // 会社・団体のアドレス：推測したURLを先に入れておく（合っていれば押すだけ）
+    var known = d && !isFree(d) && !isPublic(d) && isOrg(d);
+    if(known){   // 団体らしいアドレス（.or.jp・.org・.ngo）：推測したURLを先に入れておく（合っていれば押すだけ）
       coForm.company.value = "https://" + d;
       document.getElementById("coDomain").textContent = "https://" + d;
       document.getElementById("coGuess").hidden = false;
@@ -622,10 +591,10 @@ var REVIEW_MIN = 10;
   coForm.addEventListener("submit", function(ev){
     ev.preventDefault();
     var co = coForm.company.value.trim(), er = document.getElementById("coErr"); er.textContent = "";
-    if(!co){ er.textContent = (kind === "np" ? NP_TEXT : CO_TEXT).err; coForm.company.focus(); return; }
+    if(!co){ er.textContent = NP_ERR; coForm.company.focus(); return; }
     var d = new URLSearchParams();
     d.append("kind","dilemma_company"); d.append("source","dilemma_dl"); d.append("email", form.email.value.trim());
-    d.append("company", (kind === "np" ? "非営利：" : "") + co); d.append("route", route); d.append("ts", new Date().toISOString());
+    d.append("company", "非営利：" + co); d.append("route", route); d.append("ts", new Date().toISOString());
     try{ fetch(ENDPOINT, {method:"POST", mode:"no-cors", keepalive:true, body:d}).catch(function(){}); }catch(e){}
     document.getElementById("coBtn").disabled = true; document.getElementById("coOk").hidden = false;
   });
