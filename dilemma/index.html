@@ -573,6 +573,8 @@ var REVIEW_MIN = 10;
       document.getElementById("done").style.display = "block";
       // お礼の画面が出たときに広告の成果として数える（Meta＝Lead。2026-11-24 社長「お礼の画面が出たときに「Lead」を数えるだけにして」）
       try{ if(window.fbq){ fbq('track', 'Lead'); } }catch(e){}
+      // LinkedIn＝社長が作ったコンバージョン（dilemma_申込）。コードは 2026-11-24 15:31 社長がチャットに貼ったもの
+      try{ if(window.lintrk){ window.lintrk('track', { conversion_id: 30624324 }); } }catch(e){}
     }, 250);
   });
 
